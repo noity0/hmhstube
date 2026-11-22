@@ -20,7 +20,8 @@ hmhstube is a complete YouTube-like platform built with pure HTML, CSS, and Java
 1. Fork this repository to your GitHub account
 2. Enable GitHub Pages in your repository settings
 3. Set the source to the `main` branch
-4. Visit your GitHub Pages URL (usually `https://yourusername.github.io/hmhstube-github/`)
+4. Visit your GitHub Pages URL (usually `https://yourusername.github.io/hmhhstube/`)
+5. For the original repository: https://noity0.github.io/hmhstube/ (once enabled)
 
 ### Option 2: Local Development
 
