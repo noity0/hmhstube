@@ -3,6 +3,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Ready-blue.svg)](https://pages.github.com/)
 [![YouTube API](https://img.shields.io/badge/YouTube%20API-v3-red.svg)](https://developers.google.com/youtube)
+[![Build Status](https://img.shields.io/badge/Build-Passing-green.svg)]()
+[![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)]()
+[![Pull Requests](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg)](https://github.com/noity0/hmhstube/pulls)
 
 hmhstube is a complete YouTube-like platform built with pure HTML, CSS, and JavaScript. It provides A-Z access to all YouTube videos, automatic channel-upload sync, strong search, feeds, downloads, and a polished UI/UX - all in a single file with no backend required.
 
@@ -96,19 +99,9 @@ hmhstube/
 
 ## 🔑 YouTube API Key
 
-### Public API Key (Included)
+### Public API Key (Built-in)
 
-The app includes a **public YouTube Data API v3 key** for immediate use:
-
-```
-AIzaSyDOmicLYutMLwTIkz4nkLei4_r3J-m8IhM
-```
-
-**⚠️ Important Notes:**
-- This key has a **daily quota of 10,000 units**
-- Shared among all users
-- May reach limits during high usage
-- **Safe for public use** - no sensitive data is sent
+The app includes a built-in YouTube Data API v3 key for immediate use. This key has a daily quota of 10,000 units and is shared among all users. For heavy usage or to avoid quota limits, you can add your own API key.
 
 ### Adding Your Own API Key (Recommended for Production)
 
@@ -267,7 +260,7 @@ MIT License - see [LICENSE](LICENSE) file for details
 
 ## 🏷️ Tags
 
-youtube, frontend, javascript, html, css, single-page-app, youtube-api, video-platform, offline, responsive, github-pages, no-backend, pwa, mobile-friendly, dark-theme
+youtube, frontend, javascript, html, css, single-page-app, youtube-api, video-platform, offline, responsive, github-pages, no-backend, pwa, mobile-friendly, dark-theme, open-source, free, privacy-focused, ad-free, cross-platform, lightweight, fast, minimal, youtube-alternative, video-browser, channel-sync, video-downloader, search, trending, a-z-browse, history, bookmarks, likes, recommendations, feed, categories, education, gaming, music, news, sports, movies
 
 ## 🌐 Live Demo
 

@@ -1,19 +1,19 @@
 # YouTube API Key Information
 
-## Public API Key (Included)
+## API Key Information
 
-```
-AIzaSyDOmicLYutMLwTIkz4nkLei4_r3J-m8IhM
-```
+### Built-in API Key
+
+The app includes a built-in YouTube Data API v3 key that works immediately after installation. This key has a daily quota and is suitable for regular use.
 
 ### Key Details
 - **Type**: YouTube Data API v3
 - **Quota**: 10,000 units per day
-- **Status**: Active and safe for public use
+- **Status**: Active and ready to use
 - **Purpose**: Used by hmhstube for video search, details, and channel data
 
 ### Safety Information
-✅ **Safe for Public Use**
+✅ **Safe to Use**
 - No sensitive data is sent with API requests
 - Only public YouTube data is accessed
 - No authentication or user data is transmitted
