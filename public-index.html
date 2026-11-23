@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hmhstube - Coming Soon</title>
+  <style>
+    :root{--bg:#0f0f0f;--elev:#1c1c1c;--hover:#2a2a2a;--line:#2f2f2f;--txt:#f1f1f1;--dim:#aaaaaa;--mute:#717171;--red:#ff0033}
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+    body{background:var(--bg);color:var(--txt);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+    .container{max-width:800px;text-align:center;margin:0 auto}
+    .logo{font-size:48px;font-weight:800;margin-bottom:20px}
+    .logo b{color:var(--red)}
+    h1{font-size:36px;margin-bottom:20px;color:var(--txt)}
+    .subtitle{font-size:20px;color:var(--dim);margin-bottom:40px;line-height:1.6}
+    .steps{background:var(--elev);padding:30px;border-radius:10px;margin-bottom:40px;text-align:left}
+    .steps h2{color:var(--red);margin-bottom:20px;text-align:center}
+    .step{margin-bottom:20px;padding:15px;background:var(--hover);border-radius:8px}
+    .step h3{color:var(--txt);margin-bottom:10px}
+    .step p{color:var(--dim);line-height:1.5}
+    .cta{background:var(--red);color:#fff;padding:15px 30px;border-radius:8px;text-decoration:none;font-weight:600;font-size:18px;display:inline-block;margin:10px;transition:transform 0.2s}
+    .cta:hover{transform:scale(1.05)}
+    .github{margin-top:40px}
+    .github a{display:inline-flex;align-items:center;gap:10px;background:#24292e;color:#fff;padding:12px 24px;border-radius:6px;text-decoration:none;font-weight:600}
+    .github a i{font-size:20px}
+    @media(max-width:600px){
+      .logo{font-size:36px}
+      h1{font-size:28px}
+      .subtitle{font-size:16px}
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="logo"><b>hmhstube</b></div>
+    <h1>GitHub Pages Coming Soon!</h1>
+    <p class="subtitle">
+      This repository is ready for GitHub Pages deployment. 
+      Follow the steps below to enable your live site.
+    </p>
+    
+    <div class="steps">
+      <h2>How to Enable GitHub Pages</h2>
+      
+      <div class="step">
+        <h3>Step 1: Fork the Repository</h3>
+        <p>Go to <a href="https://github.com/noity0/hmhstube" target="_blank" rel="noopener">https://github.com/noity0/hmhstube</a> and click the "Fork" button.</p>
+      </div>
+      
+      <div class="step">
+        <h3>Step 2: Enable GitHub Pages</h3>
+        <p>Go to your forked repository settings, scroll to "GitHub Pages", select "Deploy from a branch", choose "main", and click "Save".</p>
+      </div>
+      
+      <div class="step">
+        <h3>Step 3: Wait for Deployment</h3>
+        <p>GitHub Pages will take a few minutes to deploy. Your site will be available at: <code>https://YOUR_USERNAME.github.io/hmhstube/</code></p>
+      </div>
+      
+      <div class="step">
+        <h3>Step 4: Update README</h3>
+        <p>In the README, replace <code>YOUR_USERNAME</code> with your actual GitHub username.</p>
+      </div>
+    </div>
+    
+    <div>
+      <a href="https://github.com/noity0/hmhstube" class="cta" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i> View Repository on GitHub
+      </a>
+      <a href="FINAL_SETUP.md" class="cta">
+        <i class="fas fa-book"></i> View Full Setup Guide
+      </a>
+    </div>
+    
+    <div class="github">
+      <a href="https://github.com/noity0/hmhstube" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i> View Source Code
+      </a>
+    </div>
+  </div>
+</body>
+</html>
