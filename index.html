@@ -17,6 +17,14 @@
   --shadow:0 16px 40px rgba(0,0,0,.55);
   --header-h:56px;
 }
+
+/* Light Theme */
+[data-theme="light"] {
+  --bg:#ffffff; --elev:#f8f8f8; --hover:#f0f0f0; --line:#e0e0e0;
+  --txt:#222222; --dim:#666666; --mute:#999999;
+  --red:#ff0033; --red2:#d9002b;
+  --shadow:0 16px 40px rgba(0,0,0,.1);
+}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:"Roboto","Segoe UI",system-ui,-apple-system,Arial,sans-serif;background:var(--bg);color:var(--txt);overflow-x:hidden;-webkit-font-smoothing:antialiased}
@@ -402,6 +410,7 @@ body.collapsed #mainwrap{margin-left:72px}
     </div>
   </div>
   <div class="tb-right">
+    <button class="icon-btn" id="themeToggle" title="Toggle theme"><i class="fas fa-moon"></i></button>
     <button class="icon-btn" id="syncBtn" title="Sync now"><i class="fas fa-rotate"></i></button>
     <button class="icon-btn" id="settingsBtn" title="Settings"><i class="fas fa-gear"></i></button>
     <div class="avatar" id="avatarBtn" title="You">Y</div>
@@ -507,7 +516,7 @@ body.collapsed #mainwrap{margin-left:72px}
       <div class="field">
         <label for="apiKeyInput">YouTube Data API v3 key</label>
         <input type="password" id="apiKeyInput" placeholder="AIza…" autocomplete="off">
-        <div class="help">A public API key is included and safe to use. It has a daily quota of 10,000 units. For heavy usage, add your own key to avoid limits. Get a free key at <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener">Google Cloud Console</a>.</div>
+        <div class="help">A built-in API key is included with a daily quota of 10,000 units. For heavy usage or to avoid limits, add your own key. Get a free key at <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener">Google Cloud Console</a>.</div>
         <div class="actions-row" style="margin-top:10px">
           <button class="btn primary sm" id="saveKeyBtn">Save & test</button>
           <button class="btn sm" id="removeKeyBtn">Remove key</button>
@@ -568,7 +577,7 @@ body.collapsed #mainwrap{margin-left:72px}
 
 /* ---------- Config ---------- */
 const CONFIG = {
-  key: 'AIzaSyDOmicLYutMLwTIkz4nkLei4_r3J-m8IhM', // Public API key - safe for public use
+  key: 'AIzaSyDOmicLYutMLwTIkz4nkLei4_r3J-m8IhM',
   base: 'https://www.googleapis.com/youtube/v3',
   timeout: 20000,
   syncEvery: 10 * 60 * 1000,
@@ -1876,7 +1885,8 @@ function renderSidebar(){
     navItem('history', 'fa-clock-rotate-left', 'History', { count: lib.history().length }) +
     navItem('liked', 'fa-thumbs-up', 'Liked videos', { count: likedN }) +
     navItem('bookmarks', 'fa-bookmark', 'Bookmarks', { count: bookN }) +
-    navItem('downloads', 'fa-download', 'Downloads');
+    navItem('downloads', 'fa-download', 'Downloads') +
+    navItem('playlists', 'fa-list', 'Playlists', { count: Object.keys(getPlaylists()).length });
 
   $('navChannels').innerHTML = `<h3>Channels</h3>` + (chans.length
     ? chans.map(ch => `<div class="side-channel" data-channel="${esc(ch.name)}" title="${esc(ch.name)}">
@@ -2129,17 +2139,96 @@ async function router(){
     case 'trending': renderTrending(false); break;
     case 'latest': renderLatest(); break;
     case 'az': renderAZ(); break;
-    case 'subscriptions': case 'history': case 'liked': case 'bookmarks': case 'downloads': case 'recommended': case 'discover':
+    case 'subscriptions': case 'history': case 'liked': case 'bookmarks': case 'downloads': case 'playlists': case 'recommended': case 'discover':
       renderLibrary(head); break;
     case 'search': await doSearch(seg(1), { fromRouter: true }); break;
     case 'category': await renderCategory(seg(1)); break;
     case 'channel': state.channelName = seg(1); renderChannel(seg(1)); break;
+    case 'playlist': renderPlaylist(seg(1)); break;
     case 'watch': await openWatch(seg(1)); break;
     case 'music': case 'tech': case 'gaming': case 'news': case 'education': case 'entertainment':
       location.hash = '#/category/' + head; break;
     case 'fun': location.hash = '#/category/comedy'; break;
     default: renderHome();
   }
+}
+
+/* ---------- Playlists ---------- */
+function renderPlaylists() {
+  const playlists = getPlaylists();
+  const grid = $('grid');
+  
+  if (Object.keys(playlists).length === 0) {
+    grid.innerHTML = emptyHTML('No playlists yet', 'Create a playlist to organize your favorite videos');
+    return;
+  }
+  
+  grid.innerHTML = Object.values(playlists).map(playlist => {
+    const videos = playlist.videos.map(id => INDEX.videos[id]).filter(v => v);
+    const thumbnail = videos.length > 0 ? videos[0].thumbnail : 'https://picsum.photos/seed/playlist/320/180.jpg';
+    
+    return `
+      <div class="vcard" data-playlist="${playlist.id}">
+        <div class="thumb" style="background-image:url('${thumbnail}')">
+          <div class="thumb-overlay">
+            <span class="playlist-count">${videos.length} videos</span>
+          </div>
+        </div>
+        <div class="info">
+          <div class="title">${esc(playlist.name)}</div>
+          <div class="channel">Playlist • ${new Date(playlist.created).toLocaleDateString()}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  // Add click handlers to playlist cards
+  grid.querySelectorAll('.vcard').forEach(card => {
+    card.addEventListener('click', () => {
+      const playlistId = card.dataset.playlist;
+      location.hash = `#/playlist/${playlistId}`;
+    });
+  });
+}
+
+function renderPlaylist(playlistId) {
+  const playlists = getPlaylists();
+  const playlist = playlists[playlistId];
+  
+  if (!playlist) {
+    renderLibrary('playlists');
+    return;
+  }
+  
+  const videos = playlist.videos.map(id => INDEX.videos[id]).filter(v => v);
+  
+  $('content').innerHTML = `
+    <div class="playlist-header">
+      <h1>${esc(playlist.name)}</h1>
+      <div class="playlist-meta">
+        <span>${videos.length} videos</span>
+        <span>•</span>
+        <span>Created ${new Date(playlist.created).toLocaleDateString()}</span>
+      </div>
+      <div class="playlist-actions">
+        <button class="btn" onclick="addToPlaylistFromCurrent('${playlistId}')">
+          <i class="fas fa-plus"></i> Add current video
+        </button>
+        <button class="btn" onclick="showCreatePlaylistModal()">
+          <i class="fas fa-plus"></i> New playlist
+        </button>
+      </div>
+    </div>
+    <div id="grid" class="grid"></div>
+  `;
+  
+  const grid = $('grid');
+  if (videos.length === 0) {
+    grid.innerHTML = emptyHTML('No videos in this playlist', 'Add videos to your playlist');
+    return;
+  }
+  
+  grid.innerHTML = videos.map(v => videoCard(v)).join('');
 }
 
 /* ============================================================
@@ -2638,6 +2727,7 @@ function wireTopbar(){
   $('avatarBtn').addEventListener('click', () => { location.hash = '#/history'; });
   $('syncBtn').addEventListener('click', () => syncAll(true));
   $('settingsBtn').addEventListener('click', openSettings);
+  $('themeToggle').addEventListener('click', toggleTheme);
   $('sideSync').addEventListener('click', () => syncAll(true));
   $('sideSettings').addEventListener('click', openSettings);
   $('sideClear').addEventListener('click', clearAllData);
@@ -2704,6 +2794,8 @@ function wireTopbar(){
         renderSidebar();
         if (state.view === 'downloads') renderLibrary('downloads');
       }
+    } else if (act === 'playlist') {
+      showAddToPlaylistModal(id);
     }
   }));
 
@@ -2717,6 +2809,89 @@ function wireTopbar(){
       else location.hash = '#/';
     }
   });
+  
+  // Keyboard shortcuts
+  document.addEventListener('keydown', e => {
+    // Ctrl/Cmd + Shift + T for theme toggle
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'T') {
+      e.preventDefault();
+      toggleTheme();
+    }
+  });
+}
+
+/* ---------- Theme Toggle ---------- */
+function toggleTheme() {
+  const html = document.documentElement;
+  const currentTheme = html.getAttribute('data-theme');
+  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  const icon = $('themeToggle').querySelector('i');
+  
+  html.setAttribute('data-theme', newTheme);
+  icon.className = newTheme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+  
+  // Save theme preference
+  localStorage.setItem('hmhs_theme', newTheme);
+}
+
+function loadTheme() {
+  const savedTheme = localStorage.getItem('hmhs_theme') || 'dark';
+  const html = document.documentElement;
+  const icon = $('themeToggle').querySelector('i');
+  
+  html.setAttribute('data-theme', savedTheme);
+  icon.className = savedTheme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+}
+
+/* ---------- Playlists ---------- */
+function getPlaylists() {
+  try {
+    return JSON.parse(localStorage.getItem('hmhs_playlists') || '{}');
+  } catch {
+    return {};
+  }
+}
+
+function savePlaylists(playlists) {
+  localStorage.setItem('hmhs_playlists', JSON.stringify(playlists));
+}
+
+function createPlaylist(name, videoId = null) {
+  const playlists = getPlaylists();
+  const id = 'playlist_' + Date.now();
+  playlists[id] = {
+    id,
+    name,
+    videos: videoId ? [videoId] : [],
+    created: new Date().toISOString()
+  };
+  savePlaylists(playlists);
+  return id;
+}
+
+function addToPlaylist(playlistId, videoId) {
+  const playlists = getPlaylists();
+  if (playlists[playlistId]) {
+    if (!playlists[playlistId].videos.includes(videoId)) {
+      playlists[playlistId].videos.push(videoId);
+      savePlaylists(playlists);
+      return true;
+    }
+  }
+  return false;
+}
+
+function removeFromPlaylist(playlistId, videoId) {
+  const playlists = getPlaylists();
+  if (playlists[playlistId]) {
+    const index = playlists[playlistId].videos.indexOf(videoId);
+    if (index >= 0) {
+      playlists[playlistId].videos.splice(index, 1);
+      savePlaylists(playlists);
+      return true;
+    }
+  }
+  return false;
 }
 
 /* ---------- Boot ---------- */
@@ -2732,6 +2907,7 @@ function boot(){
   applySidebarMode();
   updateSettingsUI();
   updateSyncUI();
+  loadTheme();
 
   window.addEventListener('hashchange', router);
   if (!location.hash) history.replaceState(null, '', '#/');
