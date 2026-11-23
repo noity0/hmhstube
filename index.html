@@ -2129,7 +2129,7 @@ async function router(){
     case 'trending': renderTrending(false); break;
     case 'latest': renderLatest(); break;
     case 'az': renderAZ(); break;
-    case 'subscriptions': case 'history': case 'liked': case 'bookmarks': case 'recommended': case 'discover':
+    case 'subscriptions': case 'history': case 'liked': case 'bookmarks': case 'downloads': case 'recommended': case 'discover':
       renderLibrary(head); break;
     case 'search': await doSearch(seg(1), { fromRouter: true }); break;
     case 'category': await renderCategory(seg(1)); break;
