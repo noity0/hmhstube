@@ -1,8 +1,8 @@
 # hmhstube Implemented Features
 
-## Completed Features (15/100+)
+## Completed Features (21/100+)
 
-### Core Features (10/20)
+### Core Features (11/20)
 1. **Dark/Light theme toggle** ✓
    - Implemented theme switching with CSS variables
    - Stores user preference in localStorage
@@ -77,27 +77,49 @@
     - Calculates daily/weekly/monthly stats
 
 ### Additional Features (5/40+)
-16. **Progress bar for videos** ✓
+21. **Download system** ✓ (NEW)
+    - Download button in video player
+    - Quality selection (1080p, 720p, 480p, Audio)
+    - Download progress tracking
+    - Download management
+    - Offline library storage
+
+22. **Offline library** ✓ (NEW)
+    - Store downloaded videos
+    - Play offline videos
+    - Remove offline videos
+
+23. **Offline playback** ✓ (NEW)
+    - Play downloaded videos offline
+    - Local file import support
+    - Blob URL-based playback
+
+24. **Local file import** ✓ (NEW)
+    - Import local video files
+    - Thumbnail generation from file
+    - Offline storage
+
+25. **Progress bar for videos** ✓
     - Fixed bottom progress bar
     - Draggable for seeking
     - Shows current time and duration
 
-17. **Daily/weekly/monthly viewing stats** ✓
+26. **Daily/weekly/monthly viewing stats** ✓
     - Displays viewing statistics in watch page
     - Shows total videos and time watched
     - Grid layout with stat cards
 
-18. **Export/Import watch history** ✓
+27. **Export/Import watch history** ✓
     - Export history to JSON file
     - Import history from JSON file
     - Merges with existing data
 
-19. **Keyboard shortcuts** ✓
+28. **Keyboard shortcuts** ✓
     - Comprehensive keyboard shortcuts help modal
     - Shortcuts for navigation, playback, and actions
     - Show/hide help with 'h' key
 
-20. **Video player controls** ✓
+29. **Video player controls** ✓
     - Quality selector
     - Speed control
     - Volume control

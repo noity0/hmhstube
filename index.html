@@ -270,6 +270,77 @@ body.collapsed #mainwrap{margin-left:72px}
 .speed-item:hover{background:rgba(255,255,255,0.1)}
 .speed-item.active{background:rgba(255,255,255,0.2);font-weight:600}
 
+/* Download System */
+.download-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:6px}
+.download-btn:hover{background:rgba(255,255,255,0.2)}
+.download-btn.downloading{background:var(--red);animation:downloadPulse 1.5s infinite}
+.download-btn.downloaded{background:#4CAF50;border-color:#4CAF50}
+
+@keyframes downloadPulse{0%,100%{opacity:1}50%{opacity:0.7}}
+
+.download-modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;display:none;flex-direction:column;overflow-y:auto}
+.download-modal.open{display:flex}
+.download-modal-content{background:var(--elev);border-radius:var(--r);margin:auto 40px;max-width:800px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow)}
+.download-modal-header{padding:20px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.download-modal-title{font-size:18px;font-weight:600;color:var(--txt);margin:0}
+.download-modal-close{background:none;border:none;color:var(--mute);font-size:24px;cursor:pointer;padding:0;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background 0.2s}
+.download-modal-close:hover{background:var(--hover);color:var(--txt)}
+
+.download-section{padding:20px 24px}
+.download-section-title{font-size:16px;font-weight:600;color:var(--txt);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+
+.download-options{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.download-option{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px 16px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:10px}
+.download-option:hover{border-color:var(--red);background:rgba(255,0,51,0.05)}
+.download-option input{margin:0}
+.download-option-label{font-size:13px;color:var(--txt)}
+.download-option-size{font-size:11px;color:var(--mute)}
+
+.download-button-group{display:flex;gap:10px;margin-bottom:20px}
+.download-primary-btn{background:var(--red);color:#fff;border:none;border-radius:8px;padding:12px 24px;font-size:14px;font-weight:600;cursor:pointer;flex:1;transition:background 0.2s}
+.download-primary-btn:hover{background:var(--red2)}
+.download-primary-btn:disabled{background:var(--mute);cursor:not-allowed}
+.download-secondary-btn{background:var(--hover);color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:12px 24px;font-size:14px;font-weight:600;cursor:pointer;flex:1;transition:all 0.2s}
+.download-secondary-btn:hover{background:#3a3a3a}
+
+.download-list{display:flex;flex-direction:column;gap:10px}
+.download-item{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px;display:flex;align-items:center;gap:12px}
+.download-item-thumbnail{width:120px;height:68px;background:#000;border-radius:6px;overflow:hidden;flex-shrink:0}
+.download-item-thumbnail img{width:100%;height:100%;object-fit:cover}
+.download-item-info{flex:1}
+.download-item-title{font-size:14px;font-weight:600;color:var(--txt);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.download-item-meta{font-size:12px;color:var(--mute);margin-bottom:8px}
+.download-item-progress{width:100%;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.download-item-progress-fill{height:100%;background:var(--red);width:0%;transition:width 0.3s}
+.download-item-status{font-size:12px;font-weight:600;color:var(--red);min-width:80px;text-align:right}
+.download-item-actions{display:flex;gap:8px}
+.download-action-btn{background:none;border:none;color:var(--dim);cursor:pointer;padding:6px;border-radius:4px;transition:all 0.2s}
+.download-action-btn:hover{background:var(--hover);color:var(--txt)}
+.download-action-btn.open-folder{color:#4CAF50}
+.download-action-btn.delete{color:#ff4444}
+
+.download-offline-notice{background:rgba(76,175,80,0.1);border:1px solid #4CAF50;border-radius:8px;padding:12px 16px;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.download-offline-notice i{color:#4CAF50}
+.download-offline-notice span{font-size:13px;color:var(--txt)}
+
+/* Offline Library */
+.offline-library{background:var(--elev);border-radius:var(--r);margin-top:12px;padding:16px}
+.offline-library-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.offline-library-title{font-size:14px;font-weight:600;color:var(--txt)}
+.offline-library-count{font-size:12px;color:var(--mute)}
+.offline-library-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.offline-item{background:var(--bg);border-radius:8px;overflow:hidden;cursor:pointer;transition:transform 0.2s}
+.offline-item:hover{transform:scale(1.02)}
+.offline-item-thumbnail{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}
+.offline-item-thumbnail img{width:100%;height:100%;object-fit:cover}
+.offline-item-badge{position:absolute;bottom:4px;right:4px;background:rgba(0,0,0,0.8);color:#fff;font-size:10px;padding:2px 6px;border-radius:4px}
+.offline-item-info{padding:8px}
+.offline-item-title{font-size:13px;font-weight:500;color:var(--txt);margin-bottom:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.offline-item-channel{font-size:11px;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.offline-item-actions{padding:8px;display:flex;gap:4px}
+.offline-action-btn{background:var(--hover);border:none;color:var(--txt);border-radius:4px;padding:6px;font-size:11px;cursor:pointer;flex:1;transition:all 0.2s}
+.offline-action-btn:hover{background:var(--red)}
+
 /* Autoplay Toggle */
 .autoplay-toggle{position:absolute;top:8px;left:8px;background:rgba(0,0,0,0.8);border-radius:8px;padding:4px;cursor:pointer;z-index:10;display:flex;align-items:center;gap:6px}
 .toggle-switch{position:relative;width:40px;height:20px;background:rgba(255,255,255,0.2);border-radius:10px;cursor:pointer;transition:background 0.3s}
@@ -655,6 +726,7 @@ body.collapsed #mainwrap{margin-left:72px}
             <button class="pill-btn" id="wShare"><i class="fas fa-share"></i> Share</button>
             <button class="pill-btn" id="wSave"><i class="far fa-bookmark"></i> Save</button>
             <button class="pill-btn" id="wYt"><i class="fab fa-youtube"></i> YouTube</button>
+            <button class="pill-btn" id="wDownload"><i class="fas fa-download"></i> Download</button>
           </div>
           <div class="video-ratings" id="wRatings" style="display: none;">
             <div class="rating-item">
@@ -754,6 +826,60 @@ body.collapsed #mainwrap{margin-left:72px}
         <h3>Up next</h3>
         <div id="upNext"></div>
       </aside>
+    </div>
+  </div>
+
+  <!-- Download Modal -->
+  <div class="download-modal" id="downloadModal">
+    <div class="download-modal-content">
+      <div class="download-modal-header">
+        <h2 class="download-modal-title">Download Video</h2>
+        <button class="download-modal-close" id="downloadModalClose">&times;</button>
+      </div>
+      <div class="download-section">
+        <h3 class="download-section-title">
+          <i class="fas fa-cog"></i> Download Options
+        </h3>
+        <div class="download-options" id="downloadOptions">
+          <!-- Quality options will be populated here -->
+        </div>
+        <div class="download-button-group">
+          <button class="download-primary-btn" id="downloadPrimaryBtn" disabled>
+            <i class="fas fa-download"></i> Download Now
+          </button>
+          <button class="download-secondary-btn" id="downloadImportBtn">
+            <i class="fas fa-file-import"></i> Import Local File
+          </button>
+        </div>
+        <div class="download-offline-notice" style="display:none;" id="offlineNotice">
+          <i class="fas fa-wifi"></i>
+          <span>Offline mode: Video will be saved to local device for offline playback</span>
+        </div>
+      </div>
+      
+      <div class="download-section">
+        <h3 class="download-section-title">
+          <i class="fas fa-history"></i> Download History
+        </h3>
+        <div class="download-list" id="downloadList">
+          <!-- Download items will be populated here -->
+        </div>
+      </div>
+      
+      <div class="download-section">
+        <h3 class="download-section-title">
+          <i class="fas fa-folder-open"></i> Offline Library
+        </h3>
+        <div class="offline-library">
+          <div class="offline-library-header">
+            <span class="offline-library-title">Available Offline</span>
+            <span class="offline-library-count" id="offlineCount">0 videos</span>
+          </div>
+          <div class="offline-library-grid" id="offlineLibraryGrid">
+            <!-- Offline videos will be populated here -->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1264,6 +1390,22 @@ async function downloadVideo(id){
     downloads.push(id);
     lsSet('hmhs_downloads', downloads);
     toast('Added to downloads', 'success');
+    
+    // Add to offline library
+    const offlineLibrary = JSON.parse(localStorage.getItem('hmhs_offline_library') || '[]');
+    if (!offlineLibrary.some(item => item.videoId === id)) {
+      offlineLibrary.push({
+        id: `dl_${id}`,
+        videoId: id,
+        title: v.title,
+        thumbnail: v.thumbnail,
+        quality: 'auto',
+        downloadDate: new Date().toISOString(),
+        size: 0,
+        downloaded: true
+      });
+      localStorage.setItem('hmhs_offline_library', JSON.stringify(offlineLibrary));
+    }
     
     // Update sidebar count
     renderSidebar();
@@ -3337,10 +3479,419 @@ function initKeyboardShortcuts() {
   });
 }
 
-// Initialize keyboard shortcuts when the page loads
+// Initialize keyboard shortcuts and download system when the page loads
 document.addEventListener('DOMContentLoaded', () => {
   initKeyboardShortcuts();
+  initDownloadSystem();
 });
+
+/* Download System Functions */
+
+// Download manager state
+let downloadState = {
+  currentDownloads: [],
+  offlineVideos: [],
+  isDownloading: false,
+  selectedQuality: 'auto',
+  downloadProgress: {}
+};
+
+// Initialize download system
+function initDownloadSystem() {
+  const downloadBtn = $('wDownload');
+  const downloadModal = $('downloadModal');
+  const downloadModalClose = $('downloadModalClose');
+  const downloadPrimaryBtn = $('downloadPrimaryBtn');
+  const downloadImportBtn = $('downloadImportBtn');
+  const offlineNotice = $('offlineNotice');
+  const downloadList = $('downloadList');
+  const offlineLibraryGrid = $('offlineLibraryGrid');
+  
+  if (!downloadBtn) return;
+  
+  // Open download modal when download button clicked
+  downloadBtn.addEventListener('click', () => {
+    const videoId = getCurrentVideoId();
+    if (videoId) {
+      openDownloadModal(videoId);
+    }
+  });
+  
+  // Close download modal
+  if (downloadModalClose) {
+    downloadModalClose.addEventListener('click', () => {
+      downloadModal.classList.remove('open');
+    });
+  }
+  
+  // Close on backdrop click
+  downloadModal.addEventListener('click', (e) => {
+    if (e.target === downloadModal) {
+      downloadModal.classList.remove('open');
+    }
+  });
+  
+  // Download primary button
+  if (downloadPrimaryBtn) {
+    downloadPrimaryBtn.addEventListener('click', async () => {
+      const videoId = getCurrentVideoId();
+      if (!videoId) return;
+      
+      // Get selected quality
+      const selectedOption = document.querySelector('.download-option.selected');
+      const quality = selectedOption ? selectedOption.dataset.quality : 'auto';
+      
+      // Start download
+      downloadState.isDownloading = true;
+      downloadPrimaryBtn.disabled = true;
+      downloadPrimaryBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
+      
+      try {
+        // For demo purposes, we'll simulate a download
+        // Real implementation would use YouTube API to get video info
+        const video = getVideo(videoId);
+        const thumbnail = video ? video.thumbnail : '';
+        const title = video ? video.title : 'Video';
+        
+        // Add download item
+        const downloadId = `dl_${Date.now()}`;
+        const downloadItem = {
+          id: downloadId,
+          videoId: videoId,
+          title: title,
+          thumbnail: thumbnail,
+          quality: quality,
+          status: 'downloading',
+          progress: 0,
+          downloaded: false
+        };
+        
+        downloadState.currentDownloads.push(downloadItem);
+        renderDownloadList();
+        
+        // Simulate download progress
+        await simulateDownloadProgress(downloadItem, downloadId);
+        
+        // Mark as downloaded
+        downloadItem.status = 'completed';
+        downloadItem.downloaded = true;
+        renderDownloadList();
+        
+        // Save to offline library
+        await saveToOfflineLibrary(downloadItem);
+        
+        downloadState.isDownloading = false;
+        downloadPrimaryBtn.disabled = false;
+        downloadPrimaryBtn.innerHTML = '<i class="fas fa-download"></i> Download Now';
+      } catch (e) {
+        console.error('Download failed:', e);
+        downloadState.isDownloading = false;
+        downloadPrimaryBtn.disabled = false;
+        downloadPrimaryBtn.innerHTML = '<i class="fas fa-download"></i> Download Now';
+        toast('Download failed: ' + e.message, 'error');
+      }
+    });
+  }
+  
+  // Import local file button
+  if (downloadImportBtn) {
+    downloadImportBtn.addEventListener('click', () => {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'video/*';
+      input.onchange = async (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          await importLocalVideo(file);
+        }
+      };
+      input.click();
+    });
+  }
+}
+
+// Open download modal for a video
+async function openDownloadModal(videoId) {
+  const downloadModal = $('downloadModal');
+  if (!downloadModal) return;
+  
+  // Reset modal content
+  const downloadOptions = $('downloadOptions');
+  downloadOptions.innerHTML = '';
+  
+  // Get video info
+  const video = getVideo(videoId);
+  const title = video ? video.title : 'Video';
+  
+  // Create download options
+  const qualities = [
+    { label: 'High Quality (1080p)', value: 'hd1080', size: '200MB' },
+    { label: 'Medium Quality (720p)', value: 'hd720', size: '120MB' },
+    { label: 'Low Quality (480p)', value: 'large', size: '60MB' },
+    { label: 'Audio Only (MP3)', value: 'audio', size: '5MB' }
+  ];
+  
+  qualities.forEach(q => {
+    const option = document.createElement('div');
+    option.className = 'download-option';
+    option.dataset.quality = q.value;
+    option.innerHTML = `
+      <input type="radio" name="downloadQuality" value="${q.value}">
+      <div>
+        <div class="download-option-label">${q.label}</div>
+        <div class="download-option-size">${q.size}</div>
+      </div>
+    `;
+    
+    // Add click handler
+    option.addEventListener('click', () => {
+      // Remove previous selections
+      document.querySelectorAll('.download-option').forEach(o => o.classList.remove('selected'));
+      option.classList.add('selected');
+      document.querySelectorAll('.download-option input').forEach((input, index) => {
+        input.checked = index === Array.from(document.querySelectorAll('.download-option')).indexOf(option);
+      });
+      const btn = $('downloadPrimaryBtn');
+      if (btn) btn.disabled = false;
+    });
+    
+    downloadOptions.appendChild(option);
+  });
+  
+  // Show modal
+  downloadModal.classList.add('open');
+}
+
+// Simulate download progress
+async function simulateDownloadProgress(downloadItem, downloadId) {
+  return new Promise((resolve) => {
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += Math.random() * 20;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(interval);
+        resolve();
+      } else {
+        downloadItem.progress = progress;
+        renderDownloadList();
+      }
+    }, 50);
+  });
+}
+
+// Save download to offline library
+async function saveToOfflineLibrary(downloadItem) {
+  const offlineData = {
+    id: downloadItem.id,
+    videoId: downloadItem.videoId,
+    title: downloadItem.title,
+    thumbnail: downloadItem.thumbnail,
+    quality: downloadItem.quality,
+    downloadDate: new Date().toISOString(),
+    size: 1000000,
+    downloaded: true
+  };
+  
+  const offlineLibrary = JSON.parse(localStorage.getItem('hmhs_offline_library') || '[]');
+  offlineLibrary.push(offlineData);
+  localStorage.setItem('hmhs_offline_library', JSON.stringify(offlineLibrary));
+  
+  renderOfflineLibrary();
+  return offlineData;
+}
+
+// Get offline library
+function getOfflineLibrary() {
+  return JSON.parse(localStorage.getItem('hmhs_offline_library') || '[]');
+}
+
+// Render download list
+function renderDownloadList() {
+  const downloadList = $('downloadList');
+  if (!downloadList) return;
+  
+  if (downloadState.currentDownloads.length === 0) {
+    downloadList.innerHTML = '<div style="text-align:center;color:var(--mute);padding:20px;">No downloads yet</div>';
+    return;
+  }
+  
+  downloadList.innerHTML = '';
+  downloadState.currentDownloads.forEach((item, index) => {
+    const div = document.createElement('div');
+    div.className = 'download-item';
+    div.innerHTML = `
+      <div class="download-item-thumbnail">
+        ${item.thumbnail ? `<img src="${item.thumbnail}" alt="${item.title}">` : '<div style="width:100%;height:100%;background:#000;display:flex;align-items:center;justify-content:center;color:#fff;">🎬</div>'}
+      </div>
+      <div class="download-item-info">
+        <div class="download-item-title">${item.title}</div>
+        <div class="download-item-meta">Quality: ${item.quality} • Size: ${calculateFileSize(item.quality)}</div>
+        <div class="download-item-progress">
+          <div class="download-item-progress-fill" style="width: ${item.progress}%;"></div>
+        </div>
+      </div>
+      <div class="download-item-status">${item.status === 'downloading' ? Math.round(item.progress) + '%' : item.status}</div>
+      <div class="download-item-actions">
+        <button class="download-action-btn" title="Open Download Folder"><i class="fas fa-folder-open"></i></button>
+        <button class="download-action-btn delete" title="Delete"><i class="fas fa-trash"></i></button>
+      </div>
+    `;
+    
+    downloadList.appendChild(div);
+  });
+}
+
+// Render offline library
+function renderOfflineLibrary() {
+  const offlineLibraryGrid = $('offlineLibraryGrid');
+  const offlineCount = $('offlineCount');
+  if (!offlineLibraryGrid) return;
+  
+  const offlineLibrary = JSON.parse(localStorage.getItem('hmhs_offline_library') || '[]');
+  downloadState.offlineVideos = offlineLibrary;
+  
+  if (offlineLibrary.length === 0) {
+    offlineLibraryGrid.innerHTML = '<div style="text-align:center;color:var(--mute);padding:20px;">No offline videos available</div>';
+    if (offlineCount) offlineCount.textContent = '0 videos';
+    return;
+  }
+  
+  offlineLibraryGrid.innerHTML = '';
+  offlineLibrary.forEach((video, index) => {
+    const div = document.createElement('div');
+    div.className = 'offline-item';
+    div.innerHTML = `
+      <div class="offline-item-thumbnail">
+        <img src="${video.thumbnail || 'https://picsum.photos/seed/' + video.id + '/320/180.jpg'}" alt="${video.title}">
+        <div class="offline-item-badge">OFFLINE</div>
+      </div>
+      <div class="offline-item-info">
+        <div class="offline-item-title">${video.title || 'Video'}</div>
+        <div class="offline-item-channel">Available offline</div>
+      </div>
+      <div class="offline-item-actions">
+        <button class="offline-action-btn" onclick="playOfflineVideo(${index})">Play</button>
+        <button class="offline-action-btn" onclick="removeOfflineVideo(${index})">Delete</button>
+      </div>
+    `;
+    
+    offlineLibraryGrid.appendChild(div);
+  });
+  
+  if (offlineCount) offlineCount.textContent = `${offlineLibrary.length} videos`;
+}
+
+// Play offline video
+function playOfflineVideo(index) {
+  const offlineLibrary = JSON.parse(localStorage.getItem('hmhs_offline_library') || '[]');
+  const video = offlineLibrary[index];
+  if (!video) return;
+  
+  openOfflineVideo(video);
+}
+
+// Open offline video with real player
+function openOfflineVideo(video) {
+  const watch = $('watch');
+  watch.classList.add('open');
+  watch.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+  document.body.style.background = 'var(--bg)';
+  
+  // Set video info
+  $('wTitle').textContent = video.title || 'Offline Video';
+  
+  // Create video player using blob URL or file reference
+  const playerShell = $('playerShell');
+  playerShell.innerHTML = '<div class="player-loading"><div class="spinner"></div><span>Loading offline video…</span></div>';
+  
+  if (video.type === 'local' && video.file) {
+    // Use blob URL for local files
+    const blobUrl = URL.createObjectURL(video.file);
+    playerShell.innerHTML = `<video id="offlinePlayer" controls autoplay style="width:100%;height:100%;position:absolute;inset:0;background:#000" src="${blobUrl}"></video>`;
+  } else {
+    // Demo offline player
+    playerShell.innerHTML = `<div class="player-loading"><div class="spinner"></div><span>Offline video not found</span></div>`;
+  }
+}
+
+// Clean up offline player
+function closeOfflinePlayer() {
+  const offlinePlayer = document.getElementById('offlinePlayer');
+  if (offlinePlayer) {
+    offlinePlayer.pause();
+    offlinePlayer.src = '';
+    URL.revokeObjectURL(offlinePlayer.src);
+    offlinePlayer.remove();
+  }
+}
+
+// Remove offline video
+function removeOfflineVideo(index) {
+  const offlineLibrary = JSON.parse(localStorage.getItem('hmhs_offline_library') || '[]');
+  if (index >= 0 && index < offlineLibrary.length) {
+    offlineLibrary.splice(index, 1);
+    localStorage.setItem('hmhs_offline_library', JSON.stringify(offlineLibrary));
+    renderOfflineLibrary();
+    toast('Removed from offline library', 'success');
+  }
+}
+
+// Calculate file size for quality
+function calculateFileSize(quality) {
+  switch(quality) {
+    case 'hd1080': return '200 MB';
+    case 'hd720': return '120 MB';
+    case 'large': return '60 MB';
+    case 'audio': return '5 MB';
+    default: return '100 MB';
+  }
+}
+
+// Import local video file
+async function importLocalVideo(file) {
+  const videoTitle = file.name.replace(/\.[^.]+$/, '') || 'Local Video';
+  const videoData = {
+    id: `local_${Date.now()}`,
+    title: videoTitle,
+    thumbnail: await getVideoThumbnail(file),
+    type: 'local',
+    file: file,
+    size: file.size,
+    addedAt: new Date().toISOString()
+  };
+  
+  const offlineLibrary = JSON.parse(localStorage.getItem('hmhs_offline_library') || '[]');
+  offlineLibrary.push(videoData);
+  localStorage.setItem('hmhs_offline_library', JSON.stringify(offlineLibrary));
+  
+  renderOfflineLibrary();
+  toast('Local video imported successfully', 'success');
+}
+
+// Get video thumbnail from file
+function getVideoThumbnail(file) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      try {
+        const blob = new Blob([e.target.result], { type: 'image/jpeg' });
+        const bitmap = await createImageBitmap(blob);
+        const canvas = document.createElement('canvas');
+        canvas.width = 320;
+        canvas.height = 180;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(bitmap, 0, 0, 320, 180);
+        resolve(canvas.toDataURL('image/jpeg', 0.7));
+      } catch {
+        resolve('');
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
 
 /* Autoplay Toggle Function */
 function initAutoplayToggle() {
@@ -4297,6 +4848,7 @@ function showFileBanner(){
 /* ---------- Watch page wiring ---------- */
 function wireWatch(){
   $('watchBack').addEventListener('click', () => {
+    closeOfflinePlayer();
     if (state.lastNonWatch && state.lastNonWatch !== location.hash) location.hash = state.lastNonWatch;
     else location.hash = '#/';
   });

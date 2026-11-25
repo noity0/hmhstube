@@ -21,6 +21,10 @@
 18. Video comments with replies ✓
 19. Video ratings display ✓
 20. Video duration formatting ✓
+21. Download system ✓ (NEW)
+22. Offline library ✓ (NEW)
+23. Offline playback ✓ (NEW)
+24. Local file import ✓ (NEW)
 
 ## User Experience (21-40)
 21. Keyboard shortcuts ✓
