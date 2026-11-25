@@ -247,6 +247,151 @@ body.collapsed #mainwrap{margin-left:72px}
 .like-group .sep{width:1px;background:var(--line);margin:6px 0}
 .w-desc{background:var(--elev);border-radius:var(--r);padding:14px 16px;font-size:13.5px;line-height:1.65;color:#ddd;cursor:pointer;transition:background .15s}
 .w-desc:hover{background:#232323}
+
+/* Video Quality Selector */
+.quality-selector{position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.8);border-radius:8px;padding:4px;cursor:pointer;z-index:10}
+.quality-btn{background:transparent;border:none;color:#fff;font-size:12px;padding:6px 10px;border-radius:6px;cursor:pointer;transition:all 0.2s}
+.quality-btn:hover{background:rgba(255,255,255,0.2)}
+.quality-btn.active{background:rgba(255,255,255,0.3)}
+.quality-menu{position:absolute;top:100%;right:0;background:rgba(0,0,0,0.9);border-radius:8px;margin-top:4px;overflow:hidden;min-width:120px;box-shadow:0 4px 12px rgba(0,0,0,0.3);display:none;z-index:20}
+.quality-menu.open{display:block}
+.quality-item{background:transparent;border:none;color:#fff;text-align:left;width:100%;padding:8px 12px;font-size:12px;cursor:pointer;transition:background 0.2s}
+.quality-item:hover{background:rgba(255,255,255,0.1)}
+.quality-item.active{background:rgba(255,255,255,0.2);font-weight:600}
+
+/* Video Speed Control */
+.speed-control{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,0.8);border-radius:8px;padding:4px;cursor:pointer;z-index:10;display:flex;align-items:center;gap:4px}
+.speed-btn{background:transparent;border:none;color:#fff;font-size:12px;padding:6px 10px;border-radius:6px;cursor:pointer;transition:all 0.2s;min-width:40px;text-align:center}
+.speed-btn:hover{background:rgba(255,255,255,0.2)}
+.speed-btn.active{background:rgba(255,255,255,0.3)}
+.speed-menu{position:absolute;bottom:100%;right:0;background:rgba(0,0,0,0.9);border-radius:8px;margin-bottom:4px;overflow:hidden;min-width:100px;box-shadow:0 4px 12px rgba(0,0,0,0.3);display:none;z-index:20}
+.speed-menu.open{display:block}
+.speed-item{background:transparent;border:none;color:#fff;text-align:left;width:100%;padding:8px 12px;font-size:12px;cursor:pointer;transition:background 0.2s}
+.speed-item:hover{background:rgba(255,255,255,0.1)}
+.speed-item.active{background:rgba(255,255,255,0.2);font-weight:600}
+
+/* Autoplay Toggle */
+.autoplay-toggle{position:absolute;top:8px;left:8px;background:rgba(0,0,0,0.8);border-radius:8px;padding:4px;cursor:pointer;z-index:10;display:flex;align-items:center;gap:6px}
+.toggle-switch{position:relative;width:40px;height:20px;background:rgba(255,255,255,0.2);border-radius:10px;cursor:pointer;transition:background 0.3s}
+.toggle-switch.active{background:rgba(255,255,255,0.4)}
+.toggle-slider{position:absolute;top:2px;left:2px;width:16px;height:16px;background:#fff;border-radius:50%;transition:transform 0.3s}
+.toggle-switch.active .toggle-slider{transform:translateX(20px)}
+.toggle-label{color:#fff;font-size:12px;font-weight:500}
+
+/* Volume Control */
+.volume-control{position:absolute;bottom:8px;left:8px;background:rgba(0,0,0,0.8);border-radius:8px;padding:6px;cursor:pointer;z-index:10;display:flex;align-items:center;gap:8px}
+.volume-icon{color:#fff;font-size:14px;width:20px;text-align:center}
+.volume-slider{width:80px;height:4px;background:rgba(255,255,255,0.2);border-radius:2px;position:relative;cursor:pointer}
+.volume-fill{height:100%;background:#fff;border-radius:2px;transition:width 0.1s}
+.volume-handle{position:absolute;top:50%;transform:translate(-50%, -50%);width:12px;height:12px;background:#fff;border-radius:50%;cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,0.3)}
+.volume-mute{color:#fff;font-size:12px;background:transparent;border:none;cursor:pointer;padding:4px;border-radius:4px;transition:background 0.2s}
+.volume-mute:hover{background:rgba(255,255,255,0.2)}
+
+/* Fullscreen Control */
+.fullscreen-control{position:absolute;top:8px;right:120px;background:rgba(0,0,0,0.8);border-radius:8px;padding:4px;cursor:pointer;z-index:10}
+.fullscreen-btn{background:transparent;border:none;color:#fff;font-size:14px;padding:6px 10px;border-radius:6px;cursor:pointer;transition:all 0.2s}
+.fullscreen-btn:hover{background:rgba(255,255,255,0.2)}
+
+/* Video Statistics */
+.video-stats{background:var(--elev);border-radius:var(--r);padding:12px;margin-top:12px;display:flex;flex-wrap:wrap;gap:16px}
+.stat-item{display:flex;flex-direction:column;align-items:center;min-width:80px}
+.stat-value{font-size:16px;font-weight:600;color:var(--txt);margin-bottom:4px}
+.stat-label{font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:0.5px}
+
+/* Video Chapters */
+.video-chapters{background:var(--elev);border-radius:var(--r);margin-top:12px;overflow:hidden}
+.chapter-header{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+.chapter-title{font-size:14px;font-weight:600;color:var(--txt);display:flex;align-items:center;gap:8px}
+.chapter-toggle{color:var(--mute);transition:transform 0.2s}
+.chapter-toggle.open{transform:rotate(180deg)}
+.chapter-list{max-height:0;overflow:hidden;transition:max-height 0.3s ease-out}
+.chapter-list.open{max-height:500px}
+.chapter-item{padding:10px 16px 10px 24px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;cursor:pointer;transition:background 0.2s}
+.chapter-item:hover{background:var(--hover)}
+.chapter-time{font-size:12px;color:var(--mute);min-width:45px}
+.chapter-title-text{font-size:13px;color:var(--txt);flex:1}
+
+/* Video Description Expand/Collapse */
+.w-desc{position:relative;max-height:200px;overflow:hidden;transition:max-height 0.3s ease-out}
+.w-desc.expanded{max-height:none}
+.d-text{word-wrap:break-word;overflow-wrap:break-word}
+.d-toggle{display:inline-block;margin-top:8px;color:var(--dim);font-size:12px;font-weight:500;cursor:pointer;transition:color 0.2s}
+.d-toggle:hover{color:var(--txt)}
+
+/* Related Videos */
+.related-videos{background:var(--elev);border-radius:var(--r);margin-top:12px;padding:12px}
+.related-header{font-size:14px;font-weight:600;color:var(--txt);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));gap:12px}
+.related-item{position:relative;border-radius:var(--r-sm);overflow:hidden;cursor:pointer;transition:transform 0.2s}
+.related-item:hover{transform:scale(1.02)}
+.related-thumbnail{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}
+.related-thumbnail img{width:100%;height:100%;object-fit:cover}
+.related-duration{position:absolute;bottom:4px;right:4px;background:rgba(0,0,0,0.8);color:#fff;font-size:11px;font-weight:600;padding:2px 6px;border-radius:4px}
+.related-info{padding:8px}
+.related-title{font-size:13px;font-weight:500;color:var(--txt);margin-bottom:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.related-channel{font-size:12px;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Video Comments */
+.w-comments{background:var(--elev);border-radius:var(--r);margin-top:12px}
+.comment-header{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+.comment-title{font-size:14px;font-weight:600;color:var(--txt)}
+.comment-form{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;gap:12px}
+.comment-avatar{width:32px;height:32px;border-radius:50%;flex-shrink:0}
+.comment-input{flex:1}
+.comment-textarea{width:100%;min-height:60px;background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 12px;color:var(--txt);font-size:13.5px;resize:vertical}
+.comment-textarea:focus{outline:none;border-color:var(--hover)}
+.comment-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:8px}
+.comment-submit{background:var(--red);color:#fff;border:none;border-radius:var(--r-sm);padding:6px 16px;font-size:13px;font-weight:600;cursor:pointer;transition:background 0.2s}
+.comment-submit:hover{background:var(--red2)}
+.comment-list{padding:12px 16px}
+.comment-item{display:flex;gap:12px;margin-bottom:16px}
+.comment-item:last-child{margin-bottom:0}
+.comment-main{flex:1}
+.comment-header-info{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.comment-author{font-size:13px;font-weight:600;color:var(--txt)}
+.comment-time{font-size:12px;color:var(--mute)}
+.comment-text{font-size:13.5px;color:var(--txt);line-height:1.5;margin-bottom:8px}
+.comment-actions-bar{display:flex;gap:12px}
+.comment-action{background:none;border:none;color:var(--mute);font-size:12px;cursor:pointer;transition:color 0.2s;display:flex;align-items:center;gap:4px}
+.comment-action:hover{color:var(--txt)}
+.comment-replies{margin-left:44px;margin-top:8px}
+.comment-reply-form{background:var(--bg);border-radius:var(--r-sm);padding:12px;margin-bottom:12px}
+.reply-textarea{width:100%;min-height:40px;background:var(--elev);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 12px;color:var(--txt);font-size:13px;resize:vertical}
+.reply-textarea:focus{outline:none;border-color:var(--hover)}
+.reply-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:8px}
+.reply-submit{background:var(--red);color:#fff;border:none;border-radius:var(--r-sm);padding:4px 12px;font-size:12px;font-weight:600;cursor:pointer;transition:background 0.2s}
+.reply-submit:hover{background:var(--red2)}
+
+/* Video Ratings */
+.video-ratings{display:flex;align-items:center;gap:16px;margin-top:12px;padding:12px 16px;background:var(--elev);border-radius:var(--r)}
+.rating-item{display:flex;flex-direction:column;align-items:center;gap:4px}
+.rating-value{font-size:18px;font-weight:600;color:var(--txt)}
+.rating-bar{width:100px;height:6px;background:var(--line);border-radius:3px;overflow:hidden;position:relative}
+.rating-fill{position:absolute;top:0;left:0;height:100%;background:var(--red);transition:width 0.3s}
+.rating-label{font-size:12px;color:var(--mute)}
+
+/* Video Progress Bar */
+.video-progress{position:fixed;bottom:0;left:0;right:0;height:4px;background:var(--elev);z-index:1000;display:none}
+.progress-bar{height:100%;background:var(--red);transition:width 0.1s}
+.progress-handle{position:absolute;top:50%;right:-6px;transform:translateY(-50%);width:12px;height:12px;background:#fff;border-radius:50%;cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,0.3)}
+.progress-time{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.8);color:#fff;font-size:12px;padding:4px 8px;border-radius:4px;pointer-events:none;z-index:1001;opacity:0;transition:opacity 0.2s}
+.progress-time.visible{opacity:1}
+
+/* Viewing Stats */
+.viewing-stats{background:var(--elev);border-radius:var(--r);margin-top:12px;padding:12px}
+.stats-header{font-size:14px;font-weight:600;color:var(--txt);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));gap:12px}
+.stat-card{background:var(--bg);border-radius:var(--r-sm);padding:12px;text-align:center}
+.stat-card-value{font-size:20px;font-weight:600;color:var(--txt);margin-bottom:4px}
+.stat-card-label{font-size:12px;color:var(--mute)}
+
+/* Keyboard Shortcuts Help */
+.shortcuts-help{background:var(--elev);border-radius:var(--r);margin-top:12px;padding:16px}
+.shortcuts-header{font-size:14px;font-weight:600;color:var(--txt);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.shortcuts-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:12px}
+.shortcut-item{display:flex;align-items:center;gap:8px}
+.shortcut-key{background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:4px 8px;font-size:12px;font-weight:600;color:var(--txt);min-width:60px;text-align:center}
+.shortcut-desc{font-size:12px;color:var(--mute)}
 .w-desc .d-stats{font-weight:700;color:#fff;margin-bottom:6px;font-size:13px}
 .w-desc .d-text{white-space:pre-wrap;word-break:break-word;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .w-desc.open .d-text{-webkit-line-clamp:unset;display:block}
@@ -448,12 +593,48 @@ body.collapsed #mainwrap{margin-left:72px}
 
 <!-- ═══════════ WATCH PAGE ═══════════ -->
 <section id="watch" aria-label="Video player">
+  <div class="video-progress" id="videoProgress">
+    <div class="progress-bar" id="progressBar">
+      <div class="progress-handle" id="progressHandle"></div>
+    </div>
+    <div class="progress-time" id="progressTime">0:00 / 0:00</div>
+  </div>
   <div class="watch-wrap">
     <button class="watch-back" id="watchBack"><i class="fas fa-arrow-left"></i> Back</button>
     <div class="watch-grid">
       <div class="watch-main">
         <div class="player-shell" id="playerShell">
           <div class="player-loading"><div class="spinner"></div><span>Loading player…</span></div>
+          <div class="autoplay-toggle" id="autoplayToggle">
+            <span class="toggle-label">Autoplay</span>
+            <div class="toggle-switch" id="autoplaySwitch">
+              <div class="toggle-slider"></div>
+            </div>
+          </div>
+          <div class="volume-control" id="volumeControl">
+            <button class="volume-mute" id="volumeMute">
+              <i class="fas fa-volume-up"></i>
+            </button>
+            <div class="volume-slider" id="volumeSlider">
+              <div class="volume-fill" id="volumeFill"></div>
+              <div class="volume-handle" id="volumeHandle"></div>
+            </div>
+          </div>
+          <div class="fullscreen-control" id="fullscreenControl">
+            <button class="fullscreen-btn" id="fullscreenBtn">
+              <i class="fas fa-expand"></i>
+            </button>
+          </div>
+          <div class="quality-selector" id="qualitySelector">
+            <button class="quality-btn" id="qualityBtn">
+              <i class="fas fa-cog"></i> <span id="qualityText">Auto</span>
+            </button>
+            <div class="quality-menu" id="qualityMenu"></div>
+          </div>
+          <div class="speed-control" id="speedControl">
+            <button class="speed-btn" id="speedBtn">1.0x</button>
+            <div class="speed-menu" id="speedMenu"></div>
+          </div>
         </div>
         <h1 class="w-title" id="wTitle">Video</h1>
         <div class="w-meta-row">
@@ -475,12 +656,84 @@ body.collapsed #mainwrap{margin-left:72px}
             <button class="pill-btn" id="wSave"><i class="far fa-bookmark"></i> Save</button>
             <button class="pill-btn" id="wYt"><i class="fab fa-youtube"></i> YouTube</button>
           </div>
+          <div class="video-ratings" id="wRatings" style="display: none;">
+            <div class="rating-item">
+              <div class="rating-value" id="ratingLikes">0</div>
+              <div class="rating-bar">
+                <div class="rating-fill" id="ratingLikesFill" style="width: 0%"></div>
+              </div>
+              <div class="rating-label">Likes</div>
+            </div>
+            <div class="rating-item">
+              <div class="rating-value" id="ratingDislikes">0</div>
+              <div class="rating-bar">
+                <div class="rating-fill" id="ratingDislikesFill" style="width: 0%"></div>
+              </div>
+              <div class="rating-label">Dislikes</div>
+            </div>
+            <div class="rating-item">
+              <div class="rating-value" id="ratingRatio">0%</div>
+              <div class="rating-label">Like Ratio</div>
+            </div>
+          </div>
         </div>
         <div class="w-desc" id="wDescBox">
           <div class="d-stats" id="wStats"></div>
+          <div class="video-stats" id="wVideoStats" style="display: none;">
+            <div class="stat-item">
+              <div class="stat-value" id="statViews">0</div>
+              <div class="stat-label">Views</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="statLikes">0</div>
+              <div class="stat-label">Likes</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="statComments">0</div>
+              <div class="stat-label">Comments</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="statUpload">—</div>
+              <div class="stat-label">Uploaded</div>
+            </div>
+          </div>
+          <div class="video-chapters" id="wChapters" style="display: none;">
+            <div class="chapter-header" id="chapterHeader">
+              <div class="chapter-title">
+                <i class="fas fa-list"></i>
+                <span>Chapters</span>
+              </div>
+              <i class="fas fa-chevron-down chapter-toggle" id="chapterToggle"></i>
+            </div>
+            <div class="chapter-list" id="chapterList"></div>
+          </div>
           <div class="d-text" id="wDescText"></div>
           <span class="d-toggle" id="wDescToggle">Show more</span>
         </div>
+        <div class="related-videos" id="wRelatedVideos" style="display: none;">
+          <h3 class="related-header">
+            <i class="fas fa-video"></i>
+            Up next
+          </h3>
+          <div class="related-grid" id="relatedGrid"></div>
+        </div>
+        
+        <div class="viewing-stats" id="wViewingStats" style="display: none;">
+          <h3 class="stats-header">
+            <i class="fas fa-chart-line"></i>
+            Your Viewing Statistics
+          </h3>
+          <div class="stats-grid" id="statsGrid"></div>
+        </div>
+        
+        <div class="shortcuts-help" id="wShortcutsHelp" style="display: none;">
+          <h3 class="shortcuts-header">
+            <i class="fas fa-keyboard"></i>
+            Keyboard Shortcuts
+          </h3>
+          <div class="shortcuts-grid" id="shortcutsGrid"></div>
+        </div>
+        
         <div class="w-comments">
           <h3><span id="wCommentCount">Comments</span><span class="local-tag">local</span></h3>
           <div class="comment-note">Comments are stored only in this browser.</div>
@@ -1579,6 +1832,7 @@ function startProgress(id){
 function stopProgress(){ if (progressTimer) { clearInterval(progressTimer); progressTimer = null; } }
 function destroyPlayer(){
   stopProgress();
+  stopWatchTimeTracking();
   if (ytPlayer && ytPlayer.destroy) { try { ytPlayer.destroy(); } catch {} }
   ytPlayer = null;
 }
@@ -1591,6 +1845,16 @@ function renderWatchMeta(v){
   $('wSubs').textContent = v.subscribers ? fmtViews(v.subscribers) + ' subscribers' : 'YouTube channel';
   updateWatchButtons(v);
   renderWatchStats(v);
+  renderVideoStats(v);
+  renderVideoChapters(v);
+  renderVideoRatings(v);
+  renderViewingStats();
+  
+  // Generate and render related videos
+  if (v) {
+    v.relatedVideos = generateRelatedVideos(v);
+    renderRelatedVideos(v);
+  }
 }
 
 async function openWatch(id, opts = {}){
@@ -1656,12 +1920,22 @@ async function openWatch(id, opts = {}){
         widget_referrer: isHttpMode() ? location.href.split('#')[0] : undefined
       },
       events: {
-        onReady: () => {},
+        onReady: () => {
+          initAutoplayToggle();
+          initVolumeControl();
+          initFullscreenControl();
+          initVideoProgressBar();
+          initQualitySelector();
+          initSpeedControl();
+          initDescriptionToggle();
+          updateQualityOnPlayerReady();
+          startWatchTimeTracking(id);
+        },
         onStateChange: e => {
           if (!window.YT) return;
           if (e.data === YT.PlayerState.PLAYING) startProgress(id);
           else if (e.data === YT.PlayerState.PAUSED) stopProgress();
-          else if (e.data === YT.PlayerState.ENDED) { clearProgress(id); stopProgress(); toast('Finished — pick something from Up next', 'info'); }
+          else if (e.data === YT.PlayerState.ENDED) { clearProgress(id); stopWatchTimeTracking(); stopProgress(); toast('Finished — pick something from Up next', 'info'); }
         },
         onError: e => {
           const code = e && e.data;
@@ -1672,6 +1946,1431 @@ async function openWatch(id, opts = {}){
       }
     });
   } catch (e) { showPlayerFallback(id, startAt); }
+}
+
+/* Video Quality Selector Functions */
+const QUALITY_LEVELS = [
+  { label: 'Auto', value: 'auto' },
+  { label: '1080p', value: 'hd1080' },
+  { label: '720p', value: 'hd720' },
+  { label: '480p', value: 'large' },
+  { label: '360p', value: 'medium' },
+  { label: '240p', value: 'small' }
+];
+
+function initQualitySelector() {
+  const selector = $('qualitySelector');
+  const btn = $('qualityBtn');
+  const menu = $('qualityMenu');
+  const text = $('qualityText');
+  
+  // Create quality menu items
+  menu.innerHTML = QUALITY_LEVELS.map(quality => 
+    `<button class="quality-item ${quality.value === 'auto' ? 'active' : ''}" data-quality="${quality.value}">${quality.label}</button>`
+  ).join('');
+  
+  // Toggle menu
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.classList.toggle('open');
+  });
+  
+  // Handle quality selection
+  menu.addEventListener('click', (e) => {
+    const item = e.target.closest('.quality-item');
+    if (!item) return;
+    
+    const quality = item.dataset.quality;
+    text.textContent = item.textContent;
+    
+    // Update active state
+    menu.querySelectorAll('.quality-item').forEach(q => q.classList.remove('active'));
+    item.classList.add('active');
+    
+    // Apply quality to player
+    if (ytPlayer && ytPlayer.getAvailableQualityLevels) {
+      try {
+        const availableQualities = ytPlayer.getAvailableQualityLevels();
+        if (availableQualities.includes(quality)) {
+          ytPlayer.setPlaybackQuality(quality);
+        }
+      } catch (e) {
+        console.warn('Failed to set video quality:', e);
+      }
+    }
+    
+    menu.classList.remove('open');
+  });
+  
+  // Close menu when clicking outside
+  document.addEventListener('click', () => {
+    menu.classList.remove('open');
+  });
+  
+  // Set initial quality
+  if (ytPlayer && ytPlayer.getPlaybackQuality) {
+    try {
+      const currentQuality = ytPlayer.getPlaybackQuality();
+      const quality = QUALITY_LEVELS.find(q => q.value === currentQuality);
+      if (quality) {
+        text.textContent = quality.label;
+      }
+    } catch (e) {
+      console.warn('Failed to get current video quality:', e);
+    }
+  }
+}
+
+// Update quality when player is ready
+function updateQualityOnPlayerReady() {
+  if (ytPlayer && ytPlayer.addEventListener) {
+    ytPlayer.addEventListener('onPlaybackQualityChange', (event) => {
+      const quality = event.data;
+      const qualityInfo = QUALITY_LEVELS.find(q => q.value === quality);
+      if (qualityInfo) {
+        $('qualityText').textContent = qualityInfo.label;
+      }
+    });
+  }
+}
+
+/* Video Speed Control Functions */
+const SPEED_LEVELS = [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
+
+function initSpeedControl() {
+  const control = $('speedControl');
+  const btn = $('speedBtn');
+  const menu = $('speedMenu');
+  
+  // Create speed menu items
+  menu.innerHTML = SPEED_LEVELS.map(speed => 
+    `<button class="speed-item ${speed === 1.0 ? 'active' : ''}" data-speed="${speed}">${speed}x</button>`
+  ).join('');
+  
+  // Toggle menu
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.classList.toggle('open');
+  });
+  
+  // Handle speed selection
+  menu.addEventListener('click', (e) => {
+    const item = e.target.closest('.speed-item');
+    if (!item) return;
+    
+    const speed = parseFloat(item.dataset.speed);
+    btn.textContent = `${speed}x`;
+    
+    // Update active state
+    menu.querySelectorAll('.speed-item').forEach(s => s.classList.remove('active'));
+    item.classList.add('active');
+    
+    // Apply speed to player
+    if (ytPlayer && ytPlayer.setPlaybackRate) {
+      try {
+        ytPlayer.setPlaybackRate(speed);
+        // Save speed preference
+        localStorage.setItem('hmhs_video_speed', speed);
+      } catch (e) {
+        console.warn('Failed to set video speed:', e);
+      }
+    }
+    
+    menu.classList.remove('open');
+  });
+  
+  // Close menu when clicking outside
+  document.addEventListener('click', () => {
+    menu.classList.remove('open');
+  });
+  
+  // Load saved speed
+  const savedSpeed = parseFloat(localStorage.getItem('hmhs_video_speed') || '1.0');
+  if (savedSpeed && SPEED_LEVELS.includes(savedSpeed)) {
+    btn.textContent = `${savedSpeed}x`;
+    const activeItem = menu.querySelector(`[data-speed="${savedSpeed}"]`);
+    if (activeItem) activeItem.classList.add('active');
+  }
+  
+  // Keyboard shortcuts for speed
+  document.addEventListener('keydown', (e) => {
+    if (!document.getElementById('watch').classList.contains('open')) return;
+    
+    if (e.key === '[') {
+      // Decrease speed
+      const currentIndex = SPEED_LEVELS.indexOf(savedSpeed || 1.0);
+      if (currentIndex > 0) {
+        const newSpeed = SPEED_LEVELS[currentIndex - 1];
+        btn.textContent = `${newSpeed}x`;
+        menu.querySelectorAll('.speed-item').forEach(s => s.classList.remove('active'));
+        menu.querySelector(`[data-speed="${newSpeed}"]`).classList.add('active');
+        if (ytPlayer && ytPlayer.setPlaybackRate) {
+          ytPlayer.setPlaybackRate(newSpeed);
+          localStorage.setItem('hmhs_video_speed', newSpeed);
+        }
+      }
+    } else if (e.key === ']') {
+      // Increase speed
+      const currentIndex = SPEED_LEVELS.indexOf(savedSpeed || 1.0);
+      if (currentIndex < SPEED_LEVELS.length - 1) {
+        const newSpeed = SPEED_LEVELS[currentIndex + 1];
+        btn.textContent = `${newSpeed}x`;
+        menu.querySelectorAll('.speed-item').forEach(s => s.classList.remove('active'));
+        menu.querySelector(`[data-speed="${newSpeed}"]`).classList.add('active');
+        if (ytPlayer && ytPlayer.setPlaybackRate) {
+          ytPlayer.setPlaybackRate(newSpeed);
+          localStorage.setItem('hmhs_video_speed', newSpeed);
+        }
+      }
+    }
+  });
+}
+
+/* Volume Control Functions */
+function initVolumeControl() {
+  const control = $('volumeControl');
+  const muteBtn = $('volumeMute');
+  const slider = $('volumeSlider');
+  const fill = $('volumeFill');
+  const handle = $('volumeHandle');
+  
+  // Load saved volume
+  let volume = parseFloat(localStorage.getItem('hmhs_volume') || '0.7');
+  volume = Math.max(0, Math.min(1, volume)); // Clamp between 0 and 1
+  
+  // Update UI
+  updateVolumeUI(volume);
+  
+  // Mute button
+  muteBtn.addEventListener('click', () => {
+    if (ytPlayer && ytPlayer.isMuted !== undefined) {
+      try {
+        const isMuted = ytPlayer.isMuted();
+        ytPlayer.unMute();
+        ytPlayer.setVolume(volume * 100);
+        updateVolumeUI(volume);
+        muteBtn.innerHTML = isMuted ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+      } catch (e) {
+        console.warn('Failed to control volume:', e);
+      }
+    }
+  });
+  
+  // Slider interaction
+  let isDragging = false;
+  
+  const updateVolumeFromPosition = (clientX) => {
+    const rect = slider.getBoundingClientRect();
+    const x = Math.max(0, Math.min(rect.width, clientX - rect.left));
+    const newVolume = x / rect.width;
+    
+    if (ytPlayer && ytPlayer.setVolume !== undefined) {
+      try {
+        ytPlayer.setVolume(newVolume * 100);
+        localStorage.setItem('hmhs_volume', newVolume);
+        updateVolumeUI(newVolume);
+      } catch (e) {
+        console.warn('Failed to set volume:', e);
+      }
+    }
+  };
+  
+  slider.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    updateVolumeFromPosition(e.clientX);
+    e.preventDefault();
+  });
+  
+  handle.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    e.preventDefault();
+  });
+  
+  document.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+      updateVolumeFromPosition(e.clientX);
+    }
+  });
+  
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+  
+  // Keyboard shortcuts for volume
+  document.addEventListener('keydown', (e) => {
+    if (!document.getElementById('watch').classList.contains('open')) return;
+    
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      const change = e.key === 'ArrowUp' ? 0.05 : -0.05;
+      const newVolume = Math.max(0, Math.min(1, volume + change));
+      updateVolumeFromPosition(slider.getBoundingClientRect().left + (newVolume * slider.getBoundingClientRect().width));
+    }
+  });
+  
+  // Update volume when player state changes
+  if (ytPlayer && ytPlayer.addEventListener) {
+    ytPlayer.addEventListener('onVolumeChange', () => {
+      if (ytPlayer && ytPlayer.getVolume !== undefined) {
+        try {
+          const currentVolume = ytPlayer.getVolume() / 100;
+          updateVolumeUI(currentVolume);
+        } catch (e) {
+          console.warn('Failed to get current volume:', e);
+        }
+      }
+    });
+  }
+}
+
+function updateVolumeUI(volume) {
+  const fill = $('volumeFill');
+  const handle = $('volumeHandle');
+  const muteBtn = $('volumeMute');
+  
+  fill.style.width = `${volume * 100}%`;
+  handle.style.left = `${volume * 100}%`;
+  
+  // Update mute icon
+  if (volume === 0) {
+    muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+  } else if (volume < 0.5) {
+    muteBtn.innerHTML = '<i class="fas fa-volume-down"></i>';
+  } else {
+    muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+  }
+}
+
+/* Fullscreen Control Functions */
+function initFullscreenControl() {
+  const control = $('fullscreenControl');
+  const btn = $('fullscreenBtn');
+  const playerShell = $('playerShell');
+  
+  // Toggle fullscreen
+  btn.addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+      // Enter fullscreen
+      if (playerShell.requestFullscreen) {
+        playerShell.requestFullscreen();
+      } else if (playerShell.webkitRequestFullscreen) {
+        playerShell.webkitRequestFullscreen();
+      } else if (playerShell.msRequestFullscreen) {
+        playerShell.msRequestFullscreen();
+      }
+      btn.innerHTML = '<i class="fas fa-compress"></i>';
+    } else {
+      // Exit fullscreen
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+      btn.innerHTML = '<i class="fas fa-expand"></i>';
+    }
+  });
+  
+  // Handle fullscreen change events
+  document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) {
+      btn.innerHTML = '<i class="fas fa-expand"></i>';
+    }
+  });
+  
+  document.addEventListener('webkitfullscreenchange', () => {
+    if (!document.webkitFullscreenElement) {
+      btn.innerHTML = '<i class="fas fa-expand"></i>';
+    }
+  });
+  
+  // Keyboard shortcut for fullscreen
+  document.addEventListener('keydown', (e) => {
+    if (!document.getElementById('watch').classList.contains('open')) return;
+    
+    if (e.key === 'f' || e.key === 'F') {
+      e.preventDefault();
+      btn.click();
+    }
+  });
+}
+
+/* Video Statistics Functions */
+function renderVideoStats(video) {
+  const statsContainer = $('wVideoStats');
+  const viewsEl = $('statViews');
+  const likesEl = $('statLikes');
+  const commentsEl = $('statComments');
+  const uploadEl = $('statUpload');
+  
+  if (!video) {
+    statsContainer.style.display = 'none';
+    return;
+  }
+  
+  // Show stats container
+  statsContainer.style.display = 'flex';
+  
+  // Format and display views
+  if (video.views) {
+    viewsEl.textContent = fmtViews(video.views);
+  } else {
+    viewsEl.textContent = '—';
+  }
+  
+  // Format and display likes
+  if (video.likes) {
+    likesEl.textContent = fmtViews(video.likes);
+  } else {
+    likesEl.textContent = '—';
+  }
+  
+  // Format and display comments
+  if (video.commentCount) {
+    commentsEl.textContent = fmtViews(video.commentCount);
+  } else {
+    commentsEl.textContent = '—';
+  }
+  
+  // Format and display upload date
+  if (video.uploadDate) {
+    uploadEl.textContent = formatDate(video.uploadDate);
+  } else {
+    uploadEl.textContent = '—';
+  }
+}
+
+function formatDate(dateString) {
+  if (!dateString) return '—';
+  
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffTime = Math.abs(now - date);
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  
+  if (diffDays === 0) {
+    return 'Today';
+  } else if (diffDays === 1) {
+    return 'Yesterday';
+  } else if (diffDays < 7) {
+    return `${diffDays} days ago`;
+  } else if (diffDays < 30) {
+    const weeks = Math.floor(diffDays / 7);
+    return `${weeks} week${weeks > 1 ? 's' : ''} ago`;
+  } else if (diffDays < 365) {
+    const months = Math.floor(diffDays / 30);
+    return `${months} month${months > 1 ? 's' : ''} ago`;
+  } else {
+    const years = Math.floor(diffDays / 365);
+    return `${years} year${years > 1 ? 's' : ''} ago`;
+  }
+}
+
+function formatDuration(seconds) {
+  if (!seconds || seconds < 0) return '0:00';
+  
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const secs = Math.floor(seconds % 60);
+  
+  if (hours > 0) {
+    return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  } else {
+    return `${minutes}:${secs.toString().padStart(2, '0')}`;
+  }
+}
+
+/* Video Chapters Functions */
+function renderVideoChapters(video) {
+  const chaptersContainer = $('wChapters');
+  const chapterList = $('chapterList');
+  
+  if (!video || !video.chapters || video.chapters.length === 0) {
+    chaptersContainer.style.display = 'none';
+    return;
+  }
+  
+  // Show chapters container
+  chaptersContainer.style.display = 'block';
+  
+  // Clear existing chapters
+  chapterList.innerHTML = '';
+  
+  // Create chapter items
+  video.chapters.forEach((chapter, index) => {
+    const chapterItem = document.createElement('div');
+    chapterItem.className = 'chapter-item';
+    chapterItem.innerHTML = `
+      <span class="chapter-time">${formatDuration(chapter.startTime)}</span>
+      <span class="chapter-title-text">${chapter.title}</span>
+    `;
+    
+    // Add click handler to seek to chapter
+    chapterItem.addEventListener('click', () => {
+      if (ytPlayer && ytPlayer.seekTo) {
+        try {
+          ytPlayer.seekTo(chapter.startTime, true);
+        } catch (e) {
+          console.warn('Failed to seek to chapter:', e);
+        }
+      }
+    });
+    
+    chapterList.appendChild(chapterItem);
+  });
+  
+  // Add toggle functionality
+  const chapterHeader = $('chapterHeader');
+  const chapterToggle = $('chapterToggle');
+  
+  chapterHeader.addEventListener('click', () => {
+    chapterList.classList.toggle('open');
+    chapterToggle.classList.toggle('open');
+  });
+}
+
+// Auto-generate chapters from video description (basic implementation)
+function generateChaptersFromDescription(description) {
+  if (!description) return [];
+  
+  const chapters = [];
+  const lines = description.split('\n');
+  let currentTime = 0;
+  
+  for (const line of lines) {
+    // Look for timestamp patterns like "0:45" or "1:30:45"
+    const timestampMatch = line.match(/(\d{1,2}):(\d{2})(?::(\d{2}))?/);
+    if (timestampMatch) {
+      const hours = timestampMatch[1] ? parseInt(timestampMatch[1]) : 0;
+      const minutes = parseInt(timestampMatch[2]);
+      const seconds = timestampMatch[3] ? parseInt(timestampMatch[3]) : 0;
+      
+      const newTime = hours * 3600 + minutes * 60 + seconds;
+      
+      if (newTime > currentTime) {
+        // Extract title - everything after the timestamp
+        const title = line.replace(timestampMatch[0], '').trim();
+        
+        if (title) {
+          chapters.push({
+            startTime: currentTime,
+            title: title
+          });
+          currentTime = newTime;
+        }
+      }
+    }
+  }
+  
+  // Add final chapter if we have content
+  if (chapters.length > 0) {
+    chapters.push({
+      startTime: currentTime,
+      title: 'End of video'
+    });
+  }
+  
+  return chapters;
+}
+
+/* Video Description Expand/Collapse Functions */
+function initDescriptionToggle() {
+  const descBox = $('wDescBox');
+  const descToggle = $('wDescToggle');
+  
+  if (!descToggle) return;
+  
+  descToggle.addEventListener('click', () => {
+    descBox.classList.toggle('expanded');
+    descToggle.textContent = descBox.classList.contains('expanded') ? 'Show less' : 'Show more';
+  });
+}
+
+/* Related Videos Functions */
+function renderRelatedVideos(video) {
+  const relatedContainer = $('wRelatedVideos');
+  const relatedGrid = $('relatedGrid');
+  
+  if (!video || !video.relatedVideos || video.relatedVideos.length === 0) {
+    relatedContainer.style.display = 'none';
+    return;
+  }
+  
+  // Show related videos container
+  relatedContainer.style.display = 'block';
+  
+  // Clear existing related videos
+  relatedGrid.innerHTML = '';
+  
+  // Create related video items
+  video.relatedVideos.forEach(related => {
+    const relatedItem = document.createElement('div');
+    relatedItem.className = 'related-item';
+    relatedItem.innerHTML = `
+      <div class="related-thumbnail">
+        <img src="${related.thumbnail || 'https://picsum.photos/seed/' + related.id + '/320/180.jpg'}" alt="${related.title}">
+        <div class="related-duration">${related.duration || '—:—'}</div>
+      </div>
+      <div class="related-info">
+        <div class="related-title" title="${related.title || ''}">${related.title || 'Video'}</div>
+        <div class="related-channel">${related.author || 'Channel'}</div>
+      </div>
+    `;
+    
+    // Add click handler to navigate to related video
+    relatedItem.addEventListener('click', () => {
+      openWatch(related.id);
+    });
+    
+    relatedGrid.appendChild(relatedItem);
+  });
+}
+
+// Generate related videos based on current video's tags and category
+function generateRelatedVideos(video) {
+  if (!video) return [];
+  
+  const related = [];
+  const allVideos = getAllVideos();
+  
+  // Filter out the current video
+  const otherVideos = allVideos.filter(v => v.id !== video.id);
+  
+  // Sort by relevance (category match first, then random)
+  const sortedVideos = otherVideos
+    .filter(v => v.category === video.category)
+    .concat(otherVideos.filter(v => v.category !== video.category))
+    .sort(() => Math.random() - 0.5);
+  
+  // Take top 6 related videos
+  for (let i = 0; i < Math.min(6, sortedVideos.length); i++) {
+    const v = sortedVideos[i];
+    related.push({
+      id: v.id,
+      title: v.title,
+      author: v.author,
+      thumbnail: v.thumbnail,
+      duration: v.duration,
+      category: v.category
+    });
+  }
+  
+  return related;
+}
+
+/* Video Comments Functions */
+function renderComments(videoId) {
+  const commentsContainer = document.querySelector('.w-comments');
+  if (!commentsContainer) return;
+  
+  // Load comments from localStorage
+  const comments = getComments(videoId) || [];
+  
+  // Update comment count
+  const commentCount = document.getElementById('wCommentCount');
+  if (commentCount) {
+    commentCount.textContent = comments.length > 0 ? `${comments.length} Comments` : 'Comments';
+  }
+  
+  // Clear existing comments
+  const commentList = commentsContainer.querySelector('.comment-list');
+  if (commentList) {
+    commentList.innerHTML = '';
+  }
+  
+  // Render comments
+  comments.forEach(comment => {
+    const commentEl = createCommentElement(comment);
+    if (commentList) {
+      commentList.appendChild(commentEl);
+    }
+  });
+}
+
+function createCommentElement(comment) {
+  const commentItem = document.createElement('div');
+  commentItem.className = 'comment-item';
+  
+  const avatar = document.createElement('div');
+  avatar.className = 'comment-avatar';
+  avatar.style.background = hashColor(comment.author);
+  avatar.textContent = initial(comment.author);
+  
+  const main = document.createElement('div');
+  main.className = 'comment-main';
+  
+  const headerInfo = document.createElement('div');
+  headerInfo.className = 'comment-header-info';
+  
+  const author = document.createElement('span');
+  author.className = 'comment-author';
+  author.textContent = comment.author;
+  
+  const time = document.createElement('span');
+  time.className = 'comment-time';
+  time.textContent = formatDate(comment.timestamp);
+  
+  headerInfo.appendChild(author);
+  headerInfo.appendChild(time);
+  
+  const text = document.createElement('div');
+  text.className = 'comment-text';
+  text.textContent = comment.text;
+  
+  const actionsBar = document.createElement('div');
+  actionsBar.className = 'comment-actions-bar';
+  
+  const replyAction = document.createElement('button');
+  replyAction.className = 'comment-action';
+  replyAction.innerHTML = '<i class="fas fa-reply"></i> Reply';
+  replyAction.addEventListener('click', () => toggleReplyForm(comment.id));
+  
+  actionsBar.appendChild(replyAction);
+  
+  main.appendChild(headerInfo);
+  main.appendChild(text);
+  main.appendChild(actionsBar);
+  
+  // Add replies if they exist
+  if (comment.replies && comment.replies.length > 0) {
+    const repliesContainer = document.createElement('div');
+    repliesContainer.className = 'comment-replies';
+    
+    comment.replies.forEach(reply => {
+      const replyEl = createReplyElement(reply, comment.id);
+      repliesContainer.appendChild(replyEl);
+    });
+    
+    main.appendChild(repliesContainer);
+  }
+  
+  commentItem.appendChild(avatar);
+  commentItem.appendChild(main);
+  
+  return commentItem;
+}
+
+function createReplyElement(reply, parentId) {
+  const replyItem = document.createElement('div');
+  replyItem.className = 'comment-item';
+  
+  const avatar = document.createElement('div');
+  avatar.className = 'comment-avatar';
+  avatar.style.background = hashColor(reply.author);
+  avatar.textContent = initial(reply.author);
+  
+  const main = document.createElement('div');
+  main.className = 'comment-main';
+  
+  const headerInfo = document.createElement('div');
+  headerInfo.className = 'comment-header-info';
+  
+  const author = document.createElement('span');
+  author.className = 'comment-author';
+  author.textContent = reply.author;
+  
+  const time = document.createElement('span');
+  time.className = 'comment-time';
+  time.textContent = formatDate(reply.timestamp);
+  
+  headerInfo.appendChild(author);
+  headerInfo.appendChild(time);
+  
+  const text = document.createElement('div');
+  text.className = 'comment-text';
+  text.textContent = reply.text;
+  
+  main.appendChild(headerInfo);
+  main.appendChild(text);
+  
+  replyItem.appendChild(avatar);
+  replyItem.appendChild(main);
+  
+  return replyItem;
+}
+
+function toggleReplyForm(commentId) {
+  const replyForm = document.getElementById(`reply-form-${commentId}`);
+  if (replyForm) {
+    replyForm.style.display = replyForm.style.display === 'none' ? 'block' : 'none';
+  } else {
+    createReplyForm(commentId);
+  }
+}
+
+function createReplyForm(commentId) {
+  const commentsContainer = document.querySelector('.w-comments');
+  if (!commentsContainer) return;
+  
+  const commentList = commentsContainer.querySelector('.comment-list');
+  if (!commentList) return;
+  
+  // Find the comment item
+  const commentItem = Array.from(commentList.children).find(item => 
+    item.querySelector('.comment-actions-bar')?.textContent.includes(commentId)
+  );
+  
+  if (!commentItem) return;
+  
+  const replyForm = document.createElement('div');
+  replyForm.id = `reply-form-${commentId}`;
+  replyForm.className = 'comment-reply-form';
+  replyForm.style.display = 'none';
+  
+  const textarea = document.createElement('textarea');
+  textarea.className = 'reply-textarea';
+  textarea.placeholder = 'Write a reply...';
+  
+  const actions = document.createElement('div');
+  actions.className = 'reply-actions';
+  
+  const submitBtn = document.createElement('button');
+  submitBtn.className = 'reply-submit';
+  submitBtn.textContent = 'Reply';
+  submitBtn.addEventListener('click', () => submitReply(commentId, textarea.value));
+  
+  const cancelBtn = document.createElement('button');
+  cancelBtn.className = 'reply-submit';
+  cancelBtn.textContent = 'Cancel';
+  cancelBtn.style.background = 'var(--hover)';
+  cancelBtn.addEventListener('click', () => {
+    replyForm.style.display = 'none';
+  });
+  
+  actions.appendChild(submitBtn);
+  actions.appendChild(cancelBtn);
+  
+  replyForm.appendChild(textarea);
+  replyForm.appendChild(actions);
+  
+  commentItem.appendChild(replyForm);
+  replyForm.style.display = 'block';
+  textarea.focus();
+}
+
+function submitReply(commentId, replyText) {
+  if (!replyText.trim()) return;
+  
+  const videoId = getCurrentVideoId();
+  if (!videoId) return;
+  
+  const comments = getComments(videoId) || [];
+  const comment = comments.find(c => c.id === commentId);
+  
+  if (comment) {
+    if (!comment.replies) {
+      comment.replies = [];
+    }
+    
+    comment.replies.push({
+      id: `reply-${Date.now()}`,
+      author: 'You',
+      text: replyText,
+      timestamp: new Date().toISOString()
+    });
+    
+    saveComments(videoId, comments);
+    renderComments(videoId);
+  }
+}
+
+function getComments(videoId) {
+  const comments = localStorage.getItem(`hmhs_comments_${videoId}`);
+  return comments ? JSON.parse(comments) : null;
+}
+
+function saveComments(videoId, comments) {
+  localStorage.setItem(`hmhs_comments_${videoId}`, JSON.stringify(comments));
+}
+
+function getCurrentVideoId() {
+  const hash = location.hash;
+  const match = hash.match(/\/watch\/([a-zA-Z0-9_-]{11})/);
+  return match ? match[1] : null;
+}
+
+/* Video Ratings Functions */
+function renderVideoRatings(video) {
+  const ratingsContainer = $('wRatings');
+  const likesEl = $('ratingLikes');
+  const dislikesEl = $('ratingDislikes');
+  const ratioEl = $('ratingLikesFill');
+  const dislikesFillEl = $('ratingDislikesFill');
+  const ratioValueEl = $('ratingRatio');
+  
+  if (!video || (!video.likes && !video.dislikes)) {
+    ratingsContainer.style.display = 'none';
+    return;
+  }
+  
+  // Show ratings container
+  ratingsContainer.style.display = 'flex';
+  
+  // Format and display likes
+  if (video.likes) {
+    likesEl.textContent = fmtViews(video.likes);
+  } else {
+    likesEl.textContent = '0';
+  }
+  
+  // Format and display dislikes
+  if (video.dislikes) {
+    dislikesEl.textContent = fmtViews(video.dislikes);
+  } else {
+    dislikesEl.textContent = '0';
+  }
+  
+  // Calculate and display like ratio
+  const total = (video.likes || 0) + (video.dislikes || 0);
+  if (total > 0) {
+    const likeRatio = ((video.likes || 0) / total) * 100;
+    const dislikeRatio = ((video.dislikes || 0) / total) * 100;
+    
+    ratioEl.style.width = `${likeRatio}%`;
+    dislikesFillEl.style.width = `${dislikeRatio}%`;
+    ratioValueEl.textContent = `${Math.round(likeRatio)}%`;
+  } else {
+    ratioEl.style.width = '0%';
+    dislikesFillEl.style.width = '0%';
+    ratioValueEl.textContent = '0%';
+  }
+}
+
+/* Video Progress Bar Functions */
+function initVideoProgressBar() {
+  const progressContainer = $('videoProgress');
+  const progressBar = $('progressBar');
+  const progressHandle = $('progressHandle');
+  const progressTime = $('progressTime');
+  
+  let isDragging = false;
+  
+  // Show progress bar when watch page is open
+  const watchPage = $('watch');
+  const observer = new MutationObserver(() => {
+    if (watchPage.classList.contains('open')) {
+      progressContainer.style.display = 'block';
+    } else {
+      progressContainer.style.display = 'none';
+    }
+  });
+  
+  observer.observe(watchPage, { attributes: true, attributeFilter: ['class'] });
+  
+  // Update progress bar
+  function updateProgress() {
+    if (!ytPlayer || !ytPlayer.getCurrentTime || !ytPlayer.getDuration) return;
+    
+    try {
+      const currentTime = ytPlayer.getCurrentTime();
+      const duration = ytPlayer.getDuration();
+      
+      if (duration > 0) {
+        const progress = (currentTime / duration) * 100;
+        progressBar.style.width = `${progress}%`;
+        
+        // Update time display
+        progressTime.textContent = `${formatDuration(currentTime)} / ${formatDuration(duration)}`;
+        
+        // Show time display when hovering
+        progressContainer.addEventListener('mouseenter', () => {
+          progressTime.classList.add('visible');
+        });
+        
+        progressContainer.addEventListener('mouseleave', () => {
+          progressTime.classList.remove('visible');
+        });
+      }
+    } catch (e) {
+      console.warn('Failed to update progress bar:', e);
+    }
+  }
+  
+  // Update progress periodically
+  setInterval(updateProgress, 100);
+  
+  // Handle dragging
+  const startDragging = (e) => {
+    isDragging = true;
+    updateProgressFromPosition(e.clientX);
+    e.preventDefault();
+  };
+  
+  const updateDragging = (e) => {
+    if (isDragging) {
+      updateProgressFromPosition(e.clientX);
+    }
+  };
+  
+  const stopDragging = () => {
+    isDragging = false;
+  };
+  
+  const updateProgressFromPosition = (clientX) => {
+    if (!ytPlayer || !ytPlayer.getDuration) return;
+    
+    try {
+      const rect = progressContainer.getBoundingClientRect();
+      const x = Math.max(0, Math.min(rect.width, clientX - rect.left));
+      const progress = x / rect.width;
+      const duration = ytPlayer.getDuration();
+      const newTime = progress * duration;
+      
+      ytPlayer.seekTo(newTime, true);
+    } catch (e) {
+      console.warn('Failed to seek to position:', e);
+    }
+  };
+  
+  // Add event listeners
+  progressHandle.addEventListener('mousedown', startDragging);
+  progressContainer.addEventListener('mousedown', (e) => {
+    if (e.target === progressContainer) {
+      startDragging(e);
+    }
+  });
+  
+  document.addEventListener('mousemove', updateDragging);
+  document.addEventListener('mouseup', stopDragging);
+  
+  // Keyboard shortcuts for seeking
+  document.addEventListener('keydown', (e) => {
+    if (!document.getElementById('watch').classList.contains('open') || !ytPlayer) return;
+    
+    if (e.key === 'ArrowLeft') {
+      // Seek back 5 seconds
+      e.preventDefault();
+      try {
+        const currentTime = ytPlayer.getCurrentTime();
+        ytPlayer.seekTo(Math.max(0, currentTime - 5), true);
+      } catch (e) {
+        console.warn('Failed to seek back:', e);
+      }
+    } else if (e.key === 'ArrowRight') {
+      // Seek forward 5 seconds
+      e.preventDefault();
+      try {
+        const currentTime = ytPlayer.getCurrentTime();
+        const duration = ytPlayer.getDuration();
+        ytPlayer.seekTo(Math.min(duration, currentTime + 5), true);
+      } catch (e) {
+        console.warn('Failed to seek forward:', e);
+      }
+    }
+  });
+}
+
+/* Watch Time Tracking Functions */
+let watchStartTime = null;
+let watchDuration = 0;
+let watchTimer = null;
+
+function startWatchTimeTracking(videoId) {
+  if (!videoId) return;
+  
+  watchStartTime = Date.now();
+  watchDuration = 0;
+  
+  // Clear any existing timer
+  if (watchTimer) {
+    clearInterval(watchTimer);
+  }
+  
+  // Update watch time every 5 seconds
+  watchTimer = setInterval(() => {
+    if (watchStartTime) {
+      watchDuration = Date.now() - watchStartTime;
+      saveWatchTime(videoId, watchDuration);
+    }
+  }, 5000);
+}
+
+function stopWatchTimeTracking() {
+  if (watchTimer) {
+    clearInterval(watchTimer);
+    watchTimer = null;
+  }
+  
+  if (watchStartTime && watchVideo) {
+    const finalDuration = Date.now() - watchStartTime;
+    saveWatchTime(watchVideo.id, finalDuration);
+  }
+  
+  watchStartTime = null;
+  watchDuration = 0;
+}
+
+function saveWatchTime(videoId, duration) {
+  const watchHistory = getWatchHistory() || [];
+  const existingEntry = watchHistory.find(entry => entry.id === videoId);
+  
+  if (existingEntry) {
+    // Update existing entry
+    existingEntry.duration = duration;
+    existingEntry.lastWatched = new Date().toISOString();
+  } else {
+    // Add new entry
+    watchHistory.push({
+      id: videoId,
+      duration: duration,
+      lastWatched: new Date().toISOString()
+    });
+  }
+  
+  // Keep only the last 100 videos
+  if (watchHistory.length > 100) {
+    watchHistory.sort((a, b) => new Date(b.lastWatched) - new Date(a.lastWatched));
+    watchHistory.splice(100);
+  }
+  
+  localStorage.setItem('hmhs_watch_history', JSON.stringify(watchHistory));
+}
+
+function getWatchHistory() {
+  const history = localStorage.getItem('hmhs_watch_history');
+  return history ? JSON.parse(history) : null;
+}
+
+function getWatchStats() {
+  const history = getWatchHistory() || [];
+  const totalDuration = history.reduce((sum, entry) => sum + entry.duration, 0);
+  const uniqueVideos = new Set(history.map(entry => entry.id)).size;
+  
+  // Calculate daily/weekly/monthly stats
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const thisWeek = new Date(today);
+  thisWeek.setDate(today.getDate() - today.getDay());
+  const thisMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  
+  const dailyStats = history.filter(entry => new Date(entry.lastWatched) >= today);
+  const weeklyStats = history.filter(entry => new Date(entry.lastWatched) >= thisWeek);
+  const monthlyStats = history.filter(entry => new Date(entry.lastWatched) >= thisMonth);
+  
+  return {
+    totalDuration,
+    totalVideos: uniqueVideos,
+    dailyDuration: dailyStats.reduce((sum, entry) => sum + entry.duration, 0),
+    weeklyDuration: weeklyStats.reduce((sum, entry) => sum + entry.duration, 0),
+    monthlyDuration: monthlyStats.reduce((sum, entry) => sum + entry.duration, 0),
+    dailyVideos: new Set(dailyStats.map(entry => entry.id)).size,
+    weeklyVideos: new Set(weeklyStats.map(entry => entry.id)).size,
+    monthlyVideos: new Set(monthlyStats.map(entry => entry.id)).size
+  };
+}
+
+/* Viewing Stats Functions */
+function renderViewingStats() {
+  const statsContainer = $('wViewingStats');
+  const statsGrid = $('statsGrid');
+  
+  if (!statsGrid) return;
+  
+  const stats = getWatchStats();
+  
+  // Show stats container if we have data
+  if (stats.totalDuration > 0) {
+    statsContainer.style.display = 'block';
+    
+    // Clear existing stats
+    statsGrid.innerHTML = '';
+    
+    // Create stat cards
+    const statCards = [
+      { label: 'Total Videos', value: stats.totalVideos },
+      { label: 'Total Time', value: formatDuration(stats.totalDuration) },
+      { label: 'Today', value: `${stats.dailyVideos} videos`, subvalue: formatDuration(stats.dailyDuration) },
+      { label: 'This Week', value: `${stats.weeklyVideos} videos`, subvalue: formatDuration(stats.weeklyDuration) },
+      { label: 'This Month', value: `${stats.monthlyVideos} videos`, subvalue: formatDuration(stats.monthlyDuration) }
+    ];
+    
+    statCards.forEach(card => {
+      const statCard = document.createElement('div');
+      statCard.className = 'stat-card';
+      statCard.innerHTML = `
+        <div class="stat-card-value">${card.value}</div>
+        <div class="stat-card-label">${card.label}</div>
+        ${card.subvalue ? `<div class="stat-card-label" style="font-size: 10px; margin-top: 4px;">${card.subvalue}</div>` : ''}
+      `;
+      statsGrid.appendChild(statCard);
+    });
+  } else {
+    statsContainer.style.display = 'none';
+  }
+}
+
+// Export watch history function
+function exportWatchHistory() {
+  const history = getWatchHistory();
+  if (!history || history.length === 0) {
+    toast('No watch history to export', 'info');
+    return;
+  }
+  
+  const dataStr = JSON.stringify(history, null, 2);
+  const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+  
+  const exportFileDefaultName = `hmhs_watch_history_${new Date().toISOString().split('T')[0]}.json`;
+  
+  const linkElement = document.createElement('a');
+  linkElement.setAttribute('href', dataUri);
+  linkElement.setAttribute('download', exportFileDefaultName);
+  linkElement.click();
+  
+  toast('Watch history exported successfully', 'success');
+}
+
+// Import watch history function
+function importWatchHistory(file) {
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const importedData = JSON.parse(e.target.result);
+      
+      // Validate the imported data
+      if (!Array.isArray(importedData)) {
+        throw new Error('Invalid data format');
+      }
+      
+      // Get existing history
+      const existingHistory = getWatchHistory() || [];
+      
+      // Merge with existing history, avoiding duplicates
+      const mergedHistory = [...existingHistory];
+      const existingIds = new Set(mergedHistory.map(entry => entry.id));
+      
+      importedData.forEach(entry => {
+        if (!existingIds.has(entry.id)) {
+          mergedHistory.push(entry);
+          existingIds.add(entry.id);
+        }
+      });
+      
+      // Save merged history
+      localStorage.setItem('hmhs_watch_history', JSON.stringify(mergedHistory));
+      
+      // Update UI
+      renderViewingStats();
+      toast(`Imported ${importedData.length} new entries`, 'success');
+    } catch (error) {
+      toast('Failed to import watch history: ' + error.message, 'error');
+    }
+  };
+  reader.readAsText(file);
+}
+
+/* Keyboard Shortcuts Functions */
+function initKeyboardShortcuts() {
+  // Define keyboard shortcuts
+  const shortcuts = [
+    { key: 'k', desc: 'Search videos' },
+    { key: 'Escape', desc: 'Close video player' },
+    { key: 'Space', desc: 'Play/Pause video' },
+    { key: 'f', desc: 'Toggle fullscreen' },
+    { key: 'm', desc: 'Toggle mute' },
+    { key: 'ArrowLeft', desc: 'Seek back 5 seconds' },
+    { key: 'ArrowRight', desc: 'Seek forward 5 seconds' },
+    { key: '[', desc: 'Decrease playback speed' },
+    { key: ']', desc: 'Increase playback speed' },
+    { key: '1-9', desc: 'Seek to 10%-90% of video' },
+    { key: 'l', desc: 'Like video' },
+    { key: 'd', desc: 'Dislike video' },
+    { key: 's', desc: 'Save to playlist' },
+    { key: 'h', desc: 'Show keyboard shortcuts' },
+    { key: 'e', desc: 'Export watch history' },
+    { key: 'i', desc: 'Import watch history' }
+  ];
+  
+  // Create shortcuts help modal
+  const shortcutsModal = document.createElement('div');
+  shortcutsModal.className = 'shortcuts-modal';
+  shortcutsModal.id = 'shortcutsModal';
+  shortcutsModal.style.display = 'none';
+  
+  const modalContent = document.createElement('div');
+  modalContent.className = 'shortcuts-modal-content';
+  
+  const modalHeader = document.createElement('div');
+  modalHeader.className = 'shortcuts-modal-header';
+  modalHeader.innerHTML = `
+    <h2>Keyboard Shortcuts</h2>
+    <button class="shortcuts-modal-close" id="shortcutsModalClose">&times;</button>
+  `;
+  
+  const modalBody = document.createElement('div');
+  modalBody.className = 'shortcuts-modal-body';
+  
+  const shortcutsList = document.createElement('div');
+  shortcutsList.className = 'shortcuts-list';
+  
+  shortcuts.forEach(shortcut => {
+    const shortcutItem = document.createElement('div');
+    shortcutItem.className = 'shortcut-item';
+    shortcutItem.innerHTML = `
+      <div class="shortcut-key">${shortcut.key}</div>
+      <div class="shortcut-desc">${shortcut.desc}</div>
+    `;
+    shortcutsList.appendChild(shortcutItem);
+  });
+  
+  modalBody.appendChild(shortcutsList);
+  modalContent.appendChild(modalHeader);
+  modalContent.appendChild(modalBody);
+  shortcutsModal.appendChild(modalContent);
+  document.body.appendChild(shortcutsModal);
+  
+  // Add styles for shortcuts modal
+  const style = document.createElement('style');
+  style.textContent = `
+    .shortcuts-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .shortcuts-modal-content {
+      background: var(--elev);
+      border-radius: var(--r);
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow);
+    }
+    
+    .shortcuts-modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .shortcuts-modal-header h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--txt);
+    }
+    
+    .shortcuts-modal-close {
+      background: none;
+      border: none;
+      color: var(--dim);
+      font-size: 24px;
+      cursor: pointer;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.2s;
+    }
+    
+    .shortcuts-modal-close:hover {
+      background: var(--hover);
+      color: var(--txt);
+    }
+    
+    .shortcuts-modal-body {
+      padding: 20px;
+    }
+    
+    .shortcuts-list {
+      display: grid;
+      gap: 12px;
+    }
+  `;
+  document.head.appendChild(style);
+  
+  // Event listeners
+  document.getElementById('shortcutsModalClose').addEventListener('click', () => {
+    shortcutsModal.style.display = 'none';
+  });
+  
+  // Close modal when clicking outside
+  shortcutsModal.addEventListener('click', (e) => {
+    if (e.target === shortcutsModal) {
+      shortcutsModal.style.display = 'none';
+    }
+  });
+  
+  // Keyboard shortcut to show/hide help
+  document.addEventListener('keydown', (e) => {
+    if (!document.getElementById('watch').classList.contains('open')) return;
+    
+    if (e.key === 'h' || e.key === 'H') {
+      e.preventDefault();
+      shortcutsModal.style.display = shortcutsModal.style.display === 'none' ? 'flex' : 'none';
+    }
+    
+    // Export history
+    if (e.key === 'e' || e.key === 'E') {
+      e.preventDefault();
+      exportWatchHistory();
+    }
+    
+    // Import history
+    if (e.key === 'i' || e.key === 'I') {
+      e.preventDefault();
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.json';
+      input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          importWatchHistory(file);
+        }
+      };
+      input.click();
+    }
+  });
+}
+
+// Initialize keyboard shortcuts when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+  initKeyboardShortcuts();
+});
+
+/* Autoplay Toggle Function */
+function initAutoplayToggle() {
+  const toggle = $('autoplayToggle');
+  const switchEl = $('autoplaySwitch');
+  const isAutoplayEnabled = localStorage.getItem('hmhs_autoplay') !== 'false';
+  
+  // Set initial state
+  if (isAutoplayEnabled) {
+    switchEl.classList.add('active');
+  }
+  
+  // Toggle autoplay
+  switchEl.addEventListener('click', () => {
+    const isEnabled = !switchEl.classList.contains('active');
+    switchEl.classList.toggle('active');
+    localStorage.setItem('hmhs_autoplay', isEnabled);
+    
+    // Update player if it exists
+    if (ytPlayer && ytPlayer.getPlayerState) {
+      try {
+        const state = ytPlayer.getPlayerState();
+        if (state === YT.PlayerState.PLAYING && !isEnabled) {
+          ytPlayer.pauseVideo();
+        }
+      } catch (e) {
+        console.warn('Failed to control autoplay:', e);
+      }
+    }
+  });
 }
 
 function showPlayerError(code, v){

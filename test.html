@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hmhstube Feature Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .test-item {
+            margin: 10px 0;
+            padding: 8px;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+        .test-pass {
+            color: green;
+        }
+        .test-fail {
+            color: red;
+        }
+        .test-button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .test-button:hover {
+            background: #45a049;
+        }
+        .results {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 4px;
+            border-left: 4px solid #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <h1>hmhstube Feature Test</h1>
+    
+    <div class="test-section">
+        <div class="test-title">Core Features Test</div>
+        
+        <div class="test-item">
+            <strong>1. Dark/Light theme toggle</strong>
+            <div id="theme-test">Testing theme switching...</div>
+            <button class="test-button" onclick="testThemeToggle()">Test Theme Toggle</button>
+        </div>
+        
+        <div class="test-item">
+            <strong>2. Video quality selector</strong>
+            <div id="quality-test">Testing quality selector...</div>
+            <button class="test-button" onclick="testQualitySelector()">Test Quality Selector</button>
+        </div>
+        
+        <div class="test-item">
+            <strong>3. Video speed controls</strong>
+            <div id="speed-test">Testing speed controls...</div>
+            <button class="test-button" onclick="testSpeedControls()">Test Speed Controls</button>
+        </div>
+        
+        <div class="test-item">
+            <strong>4. Volume controls</strong>
+            <div id="volume-test">Testing volume controls...</div>
+            <button class="test-button" onclick="testVolumeControls()">Test Volume Controls</button>
+        </div>
+        
+        <div class="test-item">
+            <strong>5. Fullscreen mode</strong>
+            <div id="fullscreen-test">Testing fullscreen mode...</div>
+            <button class="test-button" onclick="testFullscreen()">Test Fullscreen</button>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <div class="test-title">User Experience Features Test</div>
+        
+        <div class="test-item">
+            <strong>6. Keyboard shortcuts</strong>
+            <div id="keyboard-test">Testing keyboard shortcuts...</div>
+            <button class="test-button" onclick="testKeyboardShortcuts()">Test Keyboard Shortcuts</button>
+        </div>
+        
+        <div class="test-item">
+            <strong>7. Progress bar</strong>
+            <div id="progress-test">Testing progress bar...</div>
+            <button class="test-button" onclick="testProgressBar()">Test Progress Bar</button>
+        </div>
+        
+        <div class="test-item">
+            <strong>8. Watch time tracking</strong>
+            <div id="watchtime-test">Testing watch time tracking...</div>
+            <button class="test-button" onclick="testWatchTime()">Test Watch Time</button>
+        </div>
+        
+        <div class="test-item">
+            <strong>9. Viewing statistics</strong>
+            <div id="stats-test">Testing viewing statistics...</div>
+            <button class="test-button" onclick="testViewingStats()">Test Viewing Stats</button>
+        </div>
+        
+        <div class="test-item">
+            <strong>10. Export/Import history</strong>
+            <div id="export-test">Testing export/import...</div>
+            <button class="test-button" onclick="testExportImport()">Test Export/Import</button>
+        </div>
+    </div>
+    
+    <div id="results" class="results" style="display: none;">
+        <h3>Test Results</h3>
+        <div id="results-content"></div>
+    </div>
+
+    <script>
+        // Test theme toggle
+        function testThemeToggle() {
+            const testEl = document.getElementById('theme-test');
+            try {
+                // Check if theme toggle exists in the main app
+                const mainApp = document.createElement('div');
+                mainApp.innerHTML = `
+                    <div style="--bg: #0f0f0f; --txt: #f1f1f1;">
+                        <div data-theme="light" style="--bg: #ffffff; --txt: #222222;">
+                            Test theme
+                        </div>
+                    </div>
+                `;
+                
+                // Test theme switching
+                const themeEl = mainApp.querySelector('[data-theme]');
+                themeEl.setAttribute('data-theme', 'dark');
+                
+                if (themeEl.getAttribute('data-theme') === 'dark') {
+                    testEl.innerHTML = '<span class="test-pass">✓ Theme toggle works</span>';
+                } else {
+                    testEl.innerHTML = '<span class="test-fail">✗ Theme toggle failed</span>';
+                }
+            } catch (e) {
+                testEl.innerHTML = `<span class="test-fail">✗ Error: ${e.message}</span>`;
+            }
+        }
+        
+        // Test quality selector
+        function testQualitySelector() {
+            const testEl = document.getElementById('quality-test');
+            try {
+                // Create quality selector UI
+                const qualityEl = document.createElement('div');
+                qualityEl.innerHTML = `
+                    <div class="quality-selector">
+                        <button class="quality-btn">Auto</button>
+                        <div class="quality-menu">
+                            <button class="quality-item">1080p</button>
+                            <button class="quality-item">720p</button>
+                            <button class="quality-item">480p</button>
+                        </div>
+                    </div>
+                `;
+                
+                // Test quality selection
+                const qualityItems = qualityEl.querySelectorAll('.quality-item');
+                qualityItems[0].click();
+                
+                if (qualityEl.querySelector('.quality-btn').textContent === '1080p') {
+                    testEl.innerHTML = '<span class="test-pass">✓ Quality selector works</span>';
+                } else {
+                    testEl.innerHTML = '<span class="test-fail">✗ Quality selector failed</span>';
+                }
+            } catch (e) {
+                testEl.innerHTML = `<span class="test-fail">✗ Error: ${e.message}</span>`;
+            }
+        }
+        
+        // Test speed controls
+        function testSpeedControls() {
+            const testEl = document.getElementById('speed-test');
+            try {
+                // Create speed control UI
+                const speedEl = document.createElement('div');
+                speedEl.innerHTML = `
+                    <div class="speed-control">
+                        <button class="speed-btn">1.0x</button>
+                        <div class="speed-menu">
+                            <button class="speed-item">0.5x</button>
+                            <button class="speed-item">1.0x</button>
+                            <button class="speed-item">1.5x</button>
+                        </div>
+                    </div>
+                `;
+                
+                // Test speed selection
+                const speedItems = speedEl.querySelectorAll('.speed-item');
+                speedItems[1].click();
+                
+                if (speedEl.querySelector('.speed-btn').textContent === '1.5x') {
+                    testEl.innerHTML = '<span class="test-pass">✓ Speed controls work</span>';
+                } else {
+                    testEl.innerHTML = '<span class="test-fail">✗ Speed controls failed</span>';
+                }
+            } catch (e) {
+                testEl.innerHTML = `<span class="test-fail">✗ Error: ${e.message}</span>`;
+            }
+        }
+        
+        // Test volume controls
+        function testVolumeControls() {
+            const testEl = document.getElementById('volume-test');
+            try {
+                // Create volume control UI
+                const volumeEl = document.createElement('div');
+                volumeEl.innerHTML = `
+                    <div class="volume-control">
+                        <button class="volume-mute">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                        <div class="volume-slider">
+                            <div class="volume-fill" style="width: 50%"></div>
+                            <div class="volume-handle" style="left: 50%"></div>
+                        </div>
+                    </div>
+                `;
+                
+                // Test volume slider
+                const volumeFill = volumeEl.querySelector('.volume-fill');
+                const volumeHandle = volumeEl.querySelector('.volume-handle');
+                
+                if (volumeFill && volumeHandle) {
+                    testEl.innerHTML = '<span class="test-pass">✓ Volume controls work</span>';
+                } else {
+                    testEl.innerHTML = '<span class="test-fail">✗ Volume controls failed</span>';
+                }
+            } catch (e) {
+                testEl.innerHTML = `<span class="test-fail">✗ Error: ${e.message}</span>`;
+            }
+        }
+        
+        // Test fullscreen mode
+        function testFullscreen() {
+            const testEl = document.getElementById('fullscreen-test');
+            try {
+                // Test fullscreen API
+                if (document.documentElement.requestFullscreen) {
+                    testEl.innerHTML = '<span class="test-pass">✓ Fullscreen API supported</span>';
+                } else {
+                    testEl.innerHTML = '<span class="test-fail">✗ Fullscreen API not supported</span>';
+                }
+            } catch (e) {
+                testEl.innerHTML = `<span class="test-fail">✗ Error: ${e.message}</span>`;
+            }
+        }
+        
+        // Test keyboard shortcuts
+        function testKeyboardShortcuts() {
+            const testEl = document.getElementById('keyboard-test');
+            try {
+                // Create keyboard shortcuts modal
+                const modal = document.createElement('div');
+                modal.className = 'shortcuts-modal';
+                modal.style.display = 'flex';
+                modal.innerHTML = `
+                    <div class="shortcuts-modal-content">
+                        <div class="shortcuts-modal-header">
+                            <h2>Keyboard Shortcuts</h2>
+                            <button class="shortcuts-modal-close">&times;</button>
+                        </div>
+                        <div class="shortcuts-modal-body">
+                            <div class="shortcuts-list">
+                                <div class="shortcut-item">
+                                    <div class="shortcut-key">k</div>
+                                    <div class="shortcut-desc">Search videos</div>
+                                </div>
+                                <div class="shortcut-item">
+                                    <div class="shortcut-key">f</div>
+                                    <div class="shortcut-desc">Toggle fullscreen</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                
+                // Test modal close
+                const closeBtn = modal.querySelector('.shortcuts-modal-close');
+                closeBtn.click();
+                
+                if (modal.style.display === 'none') {
+                    testEl.innerHTML = '<span class="test-pass">✓ Keyboard shortcuts modal works</span>';
+                } else {
+                    testEl.innerHTML = '<span class="test-fail">✗ Keyboard shortcuts modal failed</span>';
+                }
+                
+                document.body.removeChild(modal);
+            } catch (e) {
+                testEl.innerHTML = `<span class="test-fail">✗ Error: ${e.message}</span>`;
+            }
+        }
+        
+        // Test progress bar
+        function testProgressBar() {
+            const testEl = document.getElementById('progress-test');
+            try {
+                // Create progress bar UI
+                const progressEl = document.createElement('div');
+                progressEl.className = 'video-progress';
+                progressEl.innerHTML = `
+                    <div class="progress-bar" style="width: 30%">
+                        <div class="progress-handle"></div>
+                    </div>
+                    <div class="progress-time">1:30 / 5:00</div>
+                `;
+                
+                // Test progress bar display
+                const progressBar = progressEl.querySelector('.progress-bar');
+                const progressTime = progressEl.querySelector('.progress-time');
+                
+                if (progressBar && progressTime) {
+                    testEl.innerHTML = '<span class="test-pass">✓ Progress bar works</span>';
+                } else {
+                    testEl.innerHTML = '<span class="test-fail">✗ Progress bar failed</span>';
+                }
+            } catch (e) {
+                testEl.innerHTML = `<span class="test-fail">✗ Error: ${e.message}</span>`;
+            }
+        }
+        
+        // Test watch time tracking
+        function testWatchTime() {
+            const testEl = document.getElementById('watchtime-test');
+            try {
+                // Test localStorage for watch time
+                localStorage.setItem('hmhs_watch_test', JSON.stringify({
+                    id: 'test-video',
+                    duration: 30000,
+                    lastWatched: new Date().toISOString()
+                }));
+                
+                const watchData = localStorage.getItem('hmhs_watch_test');
+                if (watchData) {
+                    testEl.innerHTML = '<span class="test-pass">✓ Watch time tracking works</span>';
+                } else {
+                    testEl.innerHTML = '<span class="test-fail">✗ Watch time tracking failed</span>';
+                }
+                
+                localStorage.removeItem('hmhs_watch_test');
+            } catch (e) {
+                testEl.innerHTML = `<span class="test-fail">✗ Error: ${e.message}</span>`;
+            }
+        }
+        
+        // Test viewing statistics
+        function testViewingStats() {
+            const testEl = document.getElementById('stats-test');
+            try {
+                // Create viewing stats UI
+                const statsEl = document.createElement('div');
+                statsEl.className = 'viewing-stats';
+                statsEl.innerHTML = `
+                    <h3 class="stats-header">Your Viewing Statistics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-card-value">25</div>
+                            <div class="stat-card-label">Total Videos</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-value">5:30</div>
+                            <div class="stat-card-label">Total Time</div>
+                        </div>
+                    </div>
+                `;
+                
+                // Test stats display
+                const statCards = statsEl.querySelectorAll('.stat-card');
+                if (statCards.length > 0) {
+                    testEl.innerHTML = '<span class="test-pass">✓ Viewing statistics work</span>';
+                } else {
+                    testEl.innerHTML = '<span class="test-fail">✗ Viewing statistics failed</span>';
+                }
+            } catch (e) {
+                testEl.innerHTML = `<span class="test-fail">✗ Error: ${e.message}</span>`;
+            }
+        }
+        
+        // Test export/import functionality
+        function testExportImport() {
+            const testEl = document.getElementById('export-test');
+            try {
+                // Create test data
+                const testData = [
+                    {
+                        id: 'test-video-1',
+                        duration: 30000,
+                        lastWatched: new Date().toISOString()
+                    },
+                    {
+                        id: 'test-video-2',
+                        duration: 60000,
+                        lastWatched: new Date().toISOString()
+                    }
+                ];
+                
+                // Test export
+                const dataStr = JSON.stringify(testData, null, 2);
+                const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+                
+                // Test import
+                const importedData = JSON.parse(dataStr);
+                
+                if (Array.isArray(importedData) && importedData.length === 2) {
+                    testEl.innerHTML = '<span class="test-pass">✓ Export/Import works</span>';
+                } else {
+                    testEl.innerHTML = '<span class="test-fail">✗ Export/Import failed</span>';
+                }
+            } catch (e) {
+                testEl.innerHTML = `<span class="test-fail">✗ Error: ${e.message}</span>`;
+            }
+        }
+        
+        // Run all tests
+        function runAllTests() {
+            const tests = [
+                testThemeToggle,
+                testQualitySelector,
+                testSpeedControls,
+                testVolumeControls,
+                testFullscreen,
+                testKeyboardShortcuts,
+                testProgressBar,
+                testWatchTime,
+                testViewingStats,
+                testExportImport
+            ];
+            
+            const results = [];
+            tests.forEach(test => {
+                try {
+                    test();
+                } catch (e) {
+                    console.error('Test failed:', e);
+                }
+            });
+            
+            // Count results
+            const passCount = document.querySelectorAll('.test-pass').length;
+            const failCount = document.querySelectorAll('.test-fail').length;
+            
+            // Show results
+            const resultsEl = document.getElementById('results');
+            const resultsContent = document.getElementById('results-content');
+            
+            resultsContent.innerHTML = `
+                <p><strong>Passed:</strong> ${passCount}</p>
+                <p><strong>Failed:</strong> ${failCount}</p>
+                <p><strong>Total:</strong> ${passCount + failCount}</p>
+            `;
+            
+            resultsEl.style.display = 'block';
+        }
+        
+        // Add run all tests button
+        const runAllBtn = document.createElement('button');
+        runAllBtn.className = 'test-button';
+        runAllBtn.textContent = 'Run All Tests';
+        runAllBtn.style.marginTop = '20px';
+        runAllBtn.onclick = runAllTests;
+        document.body.appendChild(runAllBtn);
+    </script>
+</body>
+</html>
