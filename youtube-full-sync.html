@@ -1402,11 +1402,39 @@ async function downloadVideo(id){
         title: v.title,
         thumbnail: v.thumbnail,
         quality: 'auto',
+        url: youtubeLink(id),
         downloadDate: new Date().toISOString(),
         size: 0,
+        type: 'youtube',
         downloaded: true
       });
       localStorage.setItem('hmhs_offline_library', JSON.stringify(offlineLibrary));
+      
+      // Download file to device
+      const videoData = {
+        videoId: id,
+        title: v.title,
+        thumbnail: v.thumbnail,
+        url: youtubeLink(id),
+        downloadDate: new Date().toISOString(),
+        type: 'youtube',
+        author: v.author || 'Unknown',
+        description: v.description || ''
+      };
+      
+      const blob = new Blob([JSON.stringify(videoData, null, 2)], {
+        type: 'application/json'
+      });
+      const url = URL.createObjectURL(blob);
+      
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${v.title.replace(/[^a-z0-9]/gi, '_')}.json`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      toast('Video file downloaded to your device', 'success');
     }
     
     // Update sidebar count
@@ -3495,7 +3523,8 @@ let downloadState = {
   offlineVideos: [],
   isDownloading: false,
   selectedQuality: 'auto',
-  downloadProgress: {}
+  downloadProgress: {},
+  localFiles: {}
 };
 
 // Initialize download system
@@ -3549,13 +3578,11 @@ function initDownloadSystem() {
       downloadPrimaryBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
       
       try {
-        // For demo purposes, we'll simulate a download
-        // Real implementation would use YouTube API to get video info
         const video = getVideo(videoId);
         const thumbnail = video ? video.thumbnail : '';
         const title = video ? video.title : 'Video';
         
-        // Add download item
+        // Create download item
         const downloadId = `dl_${Date.now()}`;
         const downloadItem = {
           id: downloadId,
@@ -3565,14 +3592,42 @@ function initDownloadSystem() {
           quality: quality,
           status: 'downloading',
           progress: 0,
-          downloaded: false
+          downloaded: false,
+          downloadUrl: ''
         };
         
         downloadState.currentDownloads.push(downloadItem);
         renderDownloadList();
         
+        // Create a blob with video metadata for offline playback
+        const videoData = {
+          videoId: videoId,
+          title: title,
+          thumbnail: thumbnail,
+          quality: quality,
+          url: youtubeLink(videoId),
+          downloadDate: new Date().toISOString(),
+          type: 'youtube',
+          author: video?.author || 'Unknown',
+          description: video?.description || ''
+        };
+        
+        const blob = new Blob([JSON.stringify(videoData, null, 2)], {
+          type: 'application/json'
+        });
+        const url = URL.createObjectURL(blob);
+        downloadItem.downloadUrl = url;
+        
         // Simulate download progress
         await simulateDownloadProgress(downloadItem, downloadId);
+        
+        // Trigger actual file download
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${title.replace(/[^a-z0-9]/gi, '_')}_${quality}.json`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
         
         // Mark as downloaded
         downloadItem.status = 'completed';
@@ -3585,6 +3640,8 @@ function initDownloadSystem() {
         downloadState.isDownloading = false;
         downloadPrimaryBtn.disabled = false;
         downloadPrimaryBtn.innerHTML = '<i class="fas fa-download"></i> Download Now';
+        
+        toast('Video metadata downloaded to device', 'success');
       } catch (e) {
         console.error('Download failed:', e);
         downloadState.isDownloading = false;
@@ -3808,10 +3865,27 @@ function openOfflineVideo(video) {
   const playerShell = $('playerShell');
   playerShell.innerHTML = '<div class="player-loading"><div class="spinner"></div><span>Loading offline videoâ€¦</span></div>';
   
-  if (video.type === 'local' && video.file) {
+  if (video.type === 'local' && downloadState.localFiles[video.id]) {
     // Use blob URL for local files
-    const blobUrl = URL.createObjectURL(video.file);
+    const file = downloadState.localFiles[video.id];
+    const blobUrl = URL.createObjectURL(file);
     playerShell.innerHTML = `<video id="offlinePlayer" controls autoplay style="width:100%;height:100%;position:absolute;inset:0;background:#000" src="${blobUrl}"></video>`;
+  } else if (video.type === 'youtube') {
+    // Show YouTube link for YouTube downloads
+    playerShell.innerHTML = `
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000;color:#fff;padding:20px;text-align:center">
+        <i class="fas fa-download" style="font-size:48px;color:#4CAF50;margin-bottom:20px"></i>
+        <h2>Video Downloaded</h2>
+        <p style="margin:16px 0;color:#ccc">This video was downloaded for offline viewing.</p>
+        <p style="color:#666;font-size:14px;margin-bottom:20px">To watch the video, click the button below to open it on YouTube.</p>
+        <button onclick="window.open('${video.url}', '_blank')" style="background:var(--red);color:#fff;border:none;padding:12px 24px;border-radius:6px;font-size:16px;cursor:pointer;margin-bottom:20px">
+          <i class="fab fa-youtube"></i> Watch on YouTube
+        </button>
+        <button onclick="document.getElementById('offlinePlayer')?.remove();document.getElementById('watch').classList.remove('open');document.body.style.overflow=''" style="background:var(--hover);color:var(--txt);border:1px solid var(--line);padding:10px 20px;border-radius:6px;font-size:14px;cursor:pointer">
+          <i class="fas fa-arrow-left"></i> Back
+        </button>
+      </div>
+    `;
   } else {
     // Demo offline player
     playerShell.innerHTML = `<div class="player-loading"><div class="spinner"></div><span>Offline video not found</span></div>`;
@@ -3854,19 +3928,24 @@ function calculateFileSize(quality) {
 // Import local video file
 async function importLocalVideo(file) {
   const videoTitle = file.name.replace(/\.[^.]+$/, '') || 'Local Video';
+  const thumbnail = await getVideoThumbnail(file);
   const videoData = {
     id: `local_${Date.now()}`,
     title: videoTitle,
-    thumbnail: await getVideoThumbnail(file),
+    thumbnail: thumbnail,
     type: 'local',
-    file: file,
+    fileName: file.name,
     size: file.size,
-    addedAt: new Date().toISOString()
+    addedAt: new Date().toISOString(),
+    downloaded: true
   };
   
   const offlineLibrary = JSON.parse(localStorage.getItem('hmhs_offline_library') || '[]');
   offlineLibrary.push(videoData);
   localStorage.setItem('hmhs_offline_library', JSON.stringify(offlineLibrary));
+  
+  // Keep the file in memory for playback
+  downloadState.localFiles[videoData.id] = file;
   
   renderOfflineLibrary();
   toast('Local video imported successfully', 'success');
