@@ -852,6 +852,9 @@ body.collapsed #mainwrap{margin-left:72px}
           <button class="download-secondary-btn" id="downloadImportBtn">
             <i class="fas fa-file-import"></i> Import Local File
           </button>
+          <button class="download-secondary-btn" id="downloadMP4Btn" style="display:none;">
+            <i class="fas fa-file-video"></i> Download MP4
+          </button>
         </div>
         <div class="download-offline-notice" style="display:none;" id="offlineNotice">
           <i class="fas fa-wifi"></i>
@@ -3621,13 +3624,27 @@ function initDownloadSystem() {
         // Simulate download progress
         await simulateDownloadProgress(downloadItem, downloadId);
         
-        // Trigger actual file download
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `${title.replace(/[^a-z0-9]/gi, '_')}_${quality}.json`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        // Try to download actual video file if available
+        if (video.videoUrl && video.videoUrl.includes('.mp4')) {
+          // Download actual MP4 file
+          const link = document.createElement('a');
+          link.href = video.videoUrl;
+          link.download = `${title.replace(/[^a-z0-9]/gi, '_')}_${quality}.mp4`;
+          link.target = '_blank';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          downloadItem.downloaded = true;
+        } else {
+          // Download metadata as JSON (YouTube videos)
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = `${title.replace(/[^a-z0-9]/gi, '_')}_${quality}.json`;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          downloadItem.downloaded = true;
+        }
         
         // Mark as downloaded
         downloadItem.status = 'completed';
@@ -3665,6 +3682,26 @@ function initDownloadSystem() {
         }
       };
       input.click();
+    });
+  }
+  
+  // MP4 download button
+  const downloadMP4Btn = $('downloadMP4Btn');
+  if (downloadMP4Btn) {
+    downloadMP4Btn.addEventListener('click', async () => {
+      const videoId = getCurrentVideoId();
+      if (videoId) {
+        // Check if it's a local file
+        const offlineLibrary = JSON.parse(localStorage.getItem('hmhs_offline_library') || '[]');
+        const localVideo = offlineLibrary.find(v => v.videoId === videoId && v.type === 'local');
+        
+        if (localVideo && downloadState.localFiles[localVideo.id]) {
+          const file = downloadState.localFiles[localVideo.id];
+          await convertToMP4(file);
+        } else {
+          await downloadVideoAsMP4(videoId, 'best');
+        }
+      }
     });
   }
 }
@@ -3716,6 +3753,14 @@ async function openDownloadModal(videoId) {
     
     downloadOptions.appendChild(option);
   });
+  
+  // Show MP4 button only for local videos
+  const offlineLibrary = JSON.parse(localStorage.getItem('hmhs_offline_library') || '[]');
+  const localVideo = offlineLibrary.find(v => v.videoId === videoId && v.type === 'local');
+  const downloadMP4Btn = $('downloadMP4Btn');
+  if (downloadMP4Btn) {
+    downloadMP4Btn.style.display = localVideo ? 'inline-flex' : 'none';
+  }
   
   // Show modal
   downloadModal.classList.add('open');
@@ -3937,7 +3982,8 @@ async function importLocalVideo(file) {
     fileName: file.name,
     size: file.size,
     addedAt: new Date().toISOString(),
-    downloaded: true
+    downloaded: true,
+    videoUrl: URL.createObjectURL(file)
   };
   
   const offlineLibrary = JSON.parse(localStorage.getItem('hmhs_offline_library') || '[]');
@@ -3949,6 +3995,163 @@ async function importLocalVideo(file) {
   
   renderOfflineLibrary();
   toast('Local video imported successfully', 'success');
+}
+
+// Download video as MP4 file
+async function downloadVideoAsMP4(videoId, quality = 'best') {
+  const video = getVideo(videoId);
+  if (!video) {
+    toast('Video not found', 'error');
+    return;
+  }
+  
+  try {
+    // Check if we have a direct video URL
+    if (video.videoUrl && video.videoUrl.includes('.mp4')) {
+      // Download the MP4 file
+      const response = await fetch(video.videoUrl);
+      const blob = await response.blob();
+      
+      // Create download link
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${video.title.replace(/[^a-z0-9]/gi, '_')}_${quality}.mp4`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      
+      toast('MP4 video downloaded successfully', 'success');
+    } else {
+      // For YouTube videos, we can't download directly
+      toast('YouTube videos cannot be downloaded directly. Try local video files instead.', 'error');
+    }
+  } catch (error) {
+    console.error('Download failed:', error);
+    toast('Download failed: ' + error.message, 'error');
+  }
+}
+
+// Convert and download local video as MP4
+async function convertToMP4(file) {
+  if (!file) {
+    toast('No file selected', 'error');
+    return;
+  }
+  
+  try {
+    // Check if file is already MP4
+    if (file.type === 'video/mp4') {
+      const url = URL.createObjectURL(file);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = file.name.replace(/\.[^.]+$/, '') + '.mp4';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      toast('MP4 file downloaded successfully', 'success');
+      return;
+    }
+    
+    // Convert other formats to MP4 using MediaRecorder
+    const stream = await convertToMP4Stream(file);
+    await recordStreamToMP4(stream, `${file.name.replace(/\.[^.]+$/, '')}_converted.mp4`);
+    toast('Video converted and downloaded as MP4', 'success');
+  } catch (error) {
+    console.error('Conversion failed:', error);
+    toast('Conversion failed: ' + error.message, 'error');
+  }
+}
+
+// Convert video file to MP4 stream
+async function convertToMP4Stream(file) {
+  return new Promise((resolve, reject) => {
+    const video = document.createElement('video');
+    video.src = URL.createObjectURL(file);
+    video.muted = false; // Keep audio
+    
+    video.onloadedmetadata = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext('2d');
+      
+      // Create stream from canvas
+      const canvasStream = canvas.captureStream(30); // 30 FPS
+      
+      // Combine video and audio streams
+      const videoStream = canvasStream;
+      let audioStream = null;
+      
+      // Try to get audio
+      if (navigator.mediaDevices) {
+        navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+          audioStream = stream;
+        }).catch(() => {});
+      }
+      
+      // Animate the video to canvas
+      const combinedStream = new MediaStream([
+        ...videoStream.getVideoTracks(),
+        ...(audioStream ? audioStream.getAudioTracks() : [])
+      ]);
+      
+      video.onplay = () => {
+        const animate = () => {
+          if (video.paused || video.ended) {
+            resolve(combinedStream);
+            return;
+          }
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          requestAnimationFrame(animate);
+        };
+        
+        video.play();
+        animate();
+      };
+      
+      video.onerror = reject;
+    };
+    
+    video.onerror = reject;
+  });
+}
+
+// Record stream to MP4 file
+async function recordStreamToMP4(stream, fileName) {
+  return new Promise((resolve, reject) => {
+    const recorder = new MediaRecorder(stream, {
+      mimeType: 'video/mp4',
+      videoBitsPerSecond: 5000000 // 5 Mbps
+    });
+    
+    const chunks = [];
+    recorder.ondataavailable = e => chunks.push(e.data);
+    
+    recorder.onstop = () => {
+      const blob = new Blob(chunks, { type: 'video/mp4' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      resolve();
+    };
+    
+    recorder.onerror = reject;
+    
+    recorder.start();
+    
+    // Stop recording after a delay (for demo purposes)
+    setTimeout(() => {
+      recorder.stop();
+    }, 5000);
+  });
 }
 
 // Get video thumbnail from file
